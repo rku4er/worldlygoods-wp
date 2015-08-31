@@ -1,0 +1,78 @@
+/* Selection color */
+*::-moz-selection {
+    color: #fff;
+    background: $brand-primary;
+    text-shadow: none;
+}
+*::selection {
+    color: #fff;
+    background: $brand-primary;
+    text-shadow: none;
+}
+
+/* Headings offset */
+h1, h2, h3, h4, h5, h6{
+     margin: 1em 0 0.5em;
+}
+
+/* Fix VC rows */
+.row{
+    width: auto;
+}
+
+/* Stiky Footer */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 100vh;
+    -webkit-overflow-scrolling: touch;
+}
+.wrap {
+    padding: 0 0 100px;
+    flex: 1;
+    order: 0;
+
+    &.container{
+        max-width: 100%;
+
+        @media (max-width: $screen-xs-max){
+            width: 100%;
+        }
+    }
+    &.container-fluid{
+        width: 100%;
+    }
+}
+.navbar-fixed-top + div{
+    padding-top: 78px;
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
+        padding-top: 142px;
+    }
+}
+
+/* First element offset top */
+.wrap.container{
+     .main > :nth-child(1){
+         margin-top: $grid-gutter-width;
+     }
+}
+
+
+/* Minor adjustments */
+.navbar-static-top{
+    margin-bottom: 0;
+}
+.table-hover > tbody > tr{
+    transition: background-color .1s ease-in-out;
+}
+.list-group-item{
+    transition: background-color 0.1s ease-in-out;
+}
+.list-group-item,
+.panel{
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+

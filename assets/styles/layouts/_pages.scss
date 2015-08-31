@@ -1,0 +1,31 @@
+.page-header{
+    border: 0 none;
+    padding: 0;
+    margin-top: 0; 
+    margin-bottom: $grid-gutter-width; 
+    h1,h2{
+        margin: 0;
+    }
+}
+.page-background{
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+
+    &:before{
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    }
+}
