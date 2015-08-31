@@ -36,21 +36,6 @@ function sage_show_if_front_page( $cmb ) {
     return true;
 }
 
-/**
- * Conditionally displays a field when used as a callback in the 'show_on_cb' field parameter
- *
- * @param  CMB2_Field object $field Field object
- *
- * @return bool                     True if metabox should show
- */
-function sage_hide_if_no_cats( $field ) {
-    // Don't show this field if not in the cats category
-    if ( ! has_tag( 'cats', $field->object_id ) ) {
-        return false;
-    }
-    return true;
-}
-
 add_action( 'cmb2_init', __NAMESPACE__ . '\\sage_register_general_options' );
 /**
  * Hook in and add a demo metabox. Can only happen on the 'cmb2_init' hook.
@@ -65,7 +50,7 @@ function sage_register_general_options() {
      */
     $cmb_demo = new_cmb2_box( array(
         'id'            => $prefix . 'metabox',
-        'title'         => __( 'General', 'sage' ),
+        'title'         => __( 'General', 'cmb2' ),
         'object_types'  => array( 'page', ),
         'context'       => 'normal',
         'priority'      => 'high',
@@ -76,36 +61,24 @@ function sage_register_general_options() {
     ) );
 
     $cmb_demo->add_field( array(
-        'name'       => __( 'Test Text', 'sage' ),
-        'desc'       => __( 'field description (optional)', 'sage' ),
-        'id'         => $prefix . 'text',
-        'type'       => 'text',
-        'show_on_cb' => 'sage_hide_if_no_cats',
-        // 'sanitization_cb' => 'my_custom_sanitization', // custom sanitization callback parameter
-        // 'escape_cb'       => 'my_custom_escaping',  // custom escaping callback parameter
-        // 'on_front'        => false, // Optionally designate a field to wp-admin only
-        // 'repeatable'      => true,
-    ) );
-
-    $cmb_demo->add_field( array(
-        'name' => __( 'Hide Title', 'sage' ),
-        'desc' => __( 'Check to hide page title', 'sage' ),
+        'name' => __( 'Hide Title', 'cmb2' ),
+        'desc' => __( 'Check to hide page title', 'cmb2' ),
         'id'   => $prefix . 'hide_title',
         'type' => 'checkbox',
         // 'repeatable' => true,
     ) );
 
     $cmb_demo->add_field( array(
-        'name' => __( 'Background Image', 'sage' ),
-        'desc' => __( 'Upload an image or enter an URL', 'sage' ),
+        'name' => __( 'Background Image', 'cmb2' ),
+        'desc' => __( 'Upload an image or enter an URL', 'cmb2' ),
         'id'   => $prefix . 'bg_image',
         'type' => 'file',
         // 'repeatable' => true,
     ) );
 
     $cmb_demo->add_field( array(
-        'name'          => __( 'Background opacity', 'sage' ),
-        'desc'          => __( 'Enter value from 0 to 1 eg: 0.1', 'sage' ),
+        'name'          => __( 'Background opacity', 'cmb2' ),
+        'desc'          => __( 'Enter value from 0 to 1 eg: 0.1', 'cmb2' ),
         'id'            => $prefix . 'bg_opacity',
         'type'          => 'text_small',
         'default'       => '1'
@@ -113,22 +86,22 @@ function sage_register_general_options() {
     ) );
 
     $cmb_demo->add_field( array(
-        'name'             => __( 'Navbar position', 'sage' ),
-        'desc'             => __( 'field description (optional)', 'sage' ),
+        'name'             => __( 'Navbar position', 'cmb2' ),
+        'desc'             => __( 'field description (optional)', 'cmb2' ),
         'id'               => $prefix . 'navbar_position',
         'type'             => 'select',
         'show_option_none' => 'default',
         'options'          => array(
-            'fixed-top'    => __( 'Fixed Top', 'sage' ),
-            'fixed-bottom' => __( 'Fixed Bottom', 'sage' ),
-            'static-top'   => __( 'Static Top', 'sage' ),
+            'fixed-top'    => __( 'Fixed Top', 'cmb2' ),
+            'fixed-bottom' => __( 'Fixed Bottom', 'cmb2' ),
+            'static-top'   => __( 'Static Top', 'cmb2' ),
         ),
         // 'repeatable' => true,
     ) );
 
     $cmb_demo->add_field( array(
-        'name' => __( 'Page specific CSS', 'sage' ),
-        'desc' => __( 'Type here your custom styles', 'sage' ),
+        'name' => __( 'Page specific CSS', 'cmb2' ),
+        'desc' => __( 'Type here your custom styles', 'cmb2' ),
         'id'   => $prefix . 'css',
         'type' => 'textarea_code',
         // 'repeatable' => true,
@@ -227,80 +200,80 @@ function sage_register_slider_options() {
      */
     $cmb_group = new_cmb2_box( array(
         'id'           => $prefix . 'metabox',
-        'title'        => __( 'Slider Options', 'sage' ),
+        'title'        => __( 'Slider Options', 'cmb2' ),
         'object_types' => array( 'page', ),
     ) );
 
     $cmb_group->add_field( array(
-        'name'    => __( 'Animation', 'sage' ),
-        'desc'    => __( 'Select slider animation', 'sage' ),
+        'name'    => __( 'Animation', 'cmb2' ),
+        'desc'    => __( 'Select slider animation', 'cmb2' ),
         'id'      => $prefix . 'animation',
         'type'    => 'select',
         'options' => array(
-            'fade'   => __( 'Fade', 'sage' ),
-            'slide'  => __( 'Slide', 'sage' ),
+            'fade'   => __( 'Fade', 'cmb2' ),
+            'slide'  => __( 'Slide', 'cmb2' ),
         ),
     ) );
 
     $cmb_group->add_field( array(
-        'name'    => __( 'Interval', 'sage' ),
-        'desc' => __( 'Enter numeric value in seconds greater than zero eg: 5', 'sage' ),
+        'name'    => __( 'Interval', 'cmb2' ),
+        'desc' => __( 'Enter numeric value in seconds greater than zero eg: 5', 'cmb2' ),
         'id'      => $prefix . 'interval',
         'type'       => 'text_small',
         'default' => '5'
     ) );
 
     $cmb_group->add_field( array(
-        'name' => __( 'Parallax', 'sage' ),
-        'desc' => __( 'Turn on vertical parallax', 'sage' ),
+        'name' => __( 'Parallax', 'cmb2' ),
+        'desc' => __( 'Turn on vertical parallax', 'cmb2' ),
         'id'   => $prefix . 'parallax',
         'type' => 'checkbox',
         'default' => '',
     ) );
 
     $cmb_group->add_field( array(
-        'name' => __( 'Pause', 'sage' ),
-        'desc' => __( 'Turn on pause on hover', 'sage' ),
+        'name' => __( 'Pause', 'cmb2' ),
+        'desc' => __( 'Turn on pause on hover', 'cmb2' ),
         'id'   => $prefix . 'hover',
         'type' => 'checkbox',
         'default' => '',
     ) );
 
     $cmb_group->add_field( array(
-        'name' => __( 'Wrap', 'sage' ),
-        'desc' => __( 'Turn on rotation wrapping', 'sage' ),
+        'name' => __( 'Wrap', 'cmb2' ),
+        'desc' => __( 'Turn on rotation wrapping', 'cmb2' ),
         'id'   => $prefix . 'wrap',
         'type' => 'checkbox',
         'default' => '',
     ) );
 
     $cmb_group->add_field( array(
-        'name' => __( 'Keyboard', 'sage' ),
-        'desc' => __( 'Turn on keyboard navigation', 'sage' ),
+        'name' => __( 'Keyboard', 'cmb2' ),
+        'desc' => __( 'Turn on keyboard navigation', 'cmb2' ),
         'id'   => $prefix . 'keyboard',
         'type' => 'checkbox',
         'default' => '',
     ) );
 
     $cmb_group->add_field( array(
-        'name' => __( 'Arrows', 'sage' ),
-        'desc' => __( 'Turn on prev/next buttons', 'sage' ),
+        'name' => __( 'Arrows', 'cmb2' ),
+        'desc' => __( 'Turn on prev/next buttons', 'cmb2' ),
         'id'   => $prefix . 'arrows',
         'type' => 'checkbox',
         'default' => '',
     ) );
 
     $cmb_group->add_field( array(
-        'name' => __( 'Bullets', 'sage' ),
-        'desc' => __( 'Turn on slider bullets', 'sage' ),
+        'name' => __( 'Bullets', 'cmb2' ),
+        'desc' => __( 'Turn on slider bullets', 'cmb2' ),
         'id'   => $prefix . 'bullets',
         'type' => 'checkbox',
         'default' => '',
     ) );
 
     $cmb_group->add_field( array(
-        'name' => __( 'Fullscreen', 'sage' ),
-        'desc' => __( 'Turn on fullscreen mode(beta)', 'sage' ),
+        'name' => __( 'Fullscreen', 'cmb2' ),
+        'desc' => __( 'Turn on fullscreen mode(beta)', 'cmb2' ),
         'id'   => $prefix . 'fullscreen',
         'type' => 'checkbox',
         'default' => '',
@@ -310,11 +283,11 @@ function sage_register_slider_options() {
     $group_field_id = $cmb_group->add_field( array(
         'id'          => $prefix . 'group',
         'type'        => 'group',
-        'description' => __( 'Here you can add slides to the slider. Please take [slider] shortcode and insert it wherever you want.', 'sage' ),
+        'description' => __( 'Here you can add slides to the slider. Please take [slider] shortcode and insert it wherever you want.', 'cmb2' ),
         'options'     => array(
-            'group_title'   => __( 'Slide {#}', 'sage' ), // {#} gets replaced by row number
-            'add_button'    => __( 'Add Another Slide', 'sage' ),
-            'remove_button' => __( 'Remove Slide', 'sage' ),
+            'group_title'   => __( 'Slide {#}', 'cmb2' ), // {#} gets replaced by row number
+            'add_button'    => __( 'Add Another Slide', 'cmb2' ),
+            'remove_button' => __( 'Remove Slide', 'cmb2' ),
             'sortable'      => true, // beta
             'closed'     => true, // true to have the groups closed by default
         ),
@@ -359,31 +332,38 @@ function sage_register_slider_options() {
     ) );
 
     $cmb_group->add_group_field( $group_field_id, array(
-        'name'    => __( 'Display caption', 'sage' ),
+        'name'    => __( 'Display caption', 'cmb2' ),
         'id'      => 'show_caption',
         'type'    => 'checkbox',
         'default' => 'on',
     ) );
 
     $cmb_group->add_group_field( $group_field_id, array(
-        'name'    => __( 'Align', 'sage' ),
+        'name'    => __( 'Text Width', 'cmb2' ),
+        'id'      => 'text_width',
+        'type'    => 'text_small',
+        'default' => '60%',
+    ) );
+
+    $cmb_group->add_group_field( $group_field_id, array(
+        'name'    => __( 'Align', 'cmb2' ),
         'id'      => 'align',
         'type'    => 'select',
         'options' => array(
-            'left'   => __( 'Left', 'sage' ),
-            'center' => __( 'Center', 'sage' ),
-            'right'  => __( 'Right', 'sage' ),
+            'left'   => __( 'Left', 'cmb2' ),
+            'center' => __( 'Center', 'cmb2' ),
+            'right'  => __( 'Right', 'cmb2' ),
         ),
     ) );
 
     $cmb_group->add_group_field( $group_field_id, array(
-        'name'    => __( 'Vertical align', 'sage' ),
+        'name'    => __( 'Vertical align', 'cmb2' ),
         'id'      => 'valign',
         'type'    => 'select',
         'options' => array(
-            'top'   => __( 'Top', 'sage' ),
-            'middle' => __( 'Middle', 'sage' ),
-            'bottom'  => __( 'Bottom', 'sage' ),
+            'top'   => __( 'Top', 'cmb2' ),
+            'middle' => __( 'Middle', 'cmb2' ),
+            'bottom'  => __( 'Bottom', 'cmb2' ),
         ),
     ) );
 
@@ -395,7 +375,7 @@ function sage_register_slider_options() {
     ) );
 
     $cmb_group->add_group_field( $group_field_id, array(
-        'name'    => __( 'Title animation', 'sage' ),
+        'name'    => __( 'Title animation', 'cmb2' ),
         'id'      => 'title_anim',
         'type'    => 'select',
         'options' => $animations,
@@ -426,7 +406,7 @@ function sage_register_slider_options() {
     ) );
 
     $cmb_group->add_group_field( $group_field_id, array(
-        'name'    => __( 'Caption animation', 'sage' ),
+        'name'    => __( 'Caption animation', 'cmb2' ),
         'id'      => 'caption_anim',
         'type'    => 'select',
         'options' => $animations,
@@ -458,14 +438,14 @@ function sage_register_slider_options() {
 
     $cmb_group->add_group_field( $group_field_id, array(
         'name' => __('Overlay opacity', 'sage'),
-        'desc' => __( 'Enter value from 0 to 1 eg: 0.1', 'sage' ),
+        'desc' => __( 'Enter value from 0 to 1 eg: 0.1', 'cmb2' ),
         'id'   => 'overlay_opacity',
         'type' => 'text_small',
         'default' => 0,
     ) );
 
     $cmb_group->add_group_field( $group_field_id, array(
-        'name'    => __( 'Overlay animation', 'sage' ),
+        'name'    => __( 'Overlay animation', 'cmb2' ),
         'id'      => 'overlay_anim',
         'type'    => 'select',
         'options' => $animations,

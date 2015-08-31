@@ -118,9 +118,16 @@ function slider_init( $attr ){
 
             if($slide['show_caption']){
                 $caption = sprintf(
-                    '<div class="carousel-caption container %s %s"><div><div><div class="text-wrapper">%s%s%s</div></div></div></div>',
+                    '<div class="carousel-caption container %s %s">'
+                        .'<div>'
+                            .'<div>'
+                                .'<div class="text-wrapper" style="%s">%s%s%s</div>'
+                            .'</div>'
+                        .'</div>'
+                    .'</div>',
                     'align-'.$slide['align'],
                     'valign-'.$slide['valign'],
+                    'max-width: '. $slide['text_width'],
                     $title_html,
                     $caption_html,
                     $overlay_html

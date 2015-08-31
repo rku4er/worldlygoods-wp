@@ -143,8 +143,9 @@ add_action( 'get_header', __NAMESPACE__ . '\\page_background', 9999 );
 function page_background(){
     global $wp_query;
     $page_ID = $wp_query->queried_object->ID;
-    $page_background = get_post_meta( $page_ID, '_sage_page_background', true );
-    $page_background_opacity = get_post_meta( $page_ID, '_sage_page_overlay_opacity', true );
+    $prefix = 'sage_page_options_';
+    $page_background = get_post_meta( $page_ID, $prefix .'bg_image', true );
+    $page_background_opacity = get_post_meta( $page_ID, $prefix .'bg_opacity', true );
     echo $page_background ? '<div class="page-background" style="background-image: url(' . $page_background . '); opacity: '. $page_background_opacity .'"></div>' : '';
 }
 
@@ -155,7 +156,8 @@ add_action( 'get_footer', __NAMESPACE__ . '\\page_specific_css', 9999 );
 function page_specific_css(){
     global $wp_query;
     $page_ID = $wp_query->queried_object->ID;
-    $page_css = get_post_meta( $page_ID, '_sage_page_css', true );
+    $prefix = 'sage_page_options_';
+    $page_css = get_post_meta( $page_ID, $prefix .'css', true );
     echo $page_css ? '<style>' . $page_css . '</style>' : '';
 }
 

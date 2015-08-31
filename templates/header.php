@@ -5,7 +5,8 @@
 <?php
     $options = $redux_demo;
     $page_ID = $wp_query->queried_object->ID;
-    $navbar_position = get_post_meta( $page_ID, '_sage_navbar_position', true );
+    $prefix = 'sage_page_options_';
+    $navbar_position = get_post_meta( $page_ID, $prefix .'navbar_position', true );
     $navbar_position = $navbar_position ? 'navbar-' . $navbar_position : 'navbar-fixed-top';
     $navbar_logo = $options['navbar-logo'];
     $logo_image = $navbar_logo['url'] ? '<img src="' . esc_url($navbar_logo['url']) . '" alt="' . get_bloginfo('name') . '">' : '';
