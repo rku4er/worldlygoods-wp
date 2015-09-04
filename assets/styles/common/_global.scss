@@ -12,7 +12,7 @@
 
 /* Headings offset */
 h1, h2, h3, h4, h5, h6{
-     margin: 1em 0 0.5em;
+     margin: 1.5em 0 1em;
 }
 
 /* Fix VC rows */
@@ -50,13 +50,6 @@ body {
     @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
         padding-top: 142px;
     }
-}
-
-/* First element offset top */
-.wrap.container{
-     .main > :nth-child(1){
-         margin-top: $grid-gutter-width;
-     }
 }
 
 

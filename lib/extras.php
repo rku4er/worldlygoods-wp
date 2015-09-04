@@ -165,11 +165,30 @@ function page_specific_css(){
 /**
  * Custom HTML code
  */
-add_action( 'get_footer', __NAMESPACE__ . '\\custom_html', 9999 );
+add_action( 'get_header', __NAMESPACE__ . '\\custom_html', 999 );
 function custom_html(){
     global $redux_demo;
-    $options = $redux_demo;
-    echo $options['custom-html-editor'];
+    $editor_content = $redux_demo['custom-html-editor'];
+    echo $editor_content ? $editor_content : '';
+}
+/**
+ * Custom HTML code
+ */
+add_action( 'get_header', __NAMESPACE__ . '\\custom_css', 999 );
+function custom_css(){
+    global $redux_demo;
+    $editor_content = $redux_demo['custom-css-editor'];
+    echo $editor_content ? '<style>'. $editor_content .'</style>' : '';
+}
+
+/**
+ * Custom HTML code
+ */
+add_action( 'get_footer', __NAMESPACE__ . '\\custom_js', 999 );
+function custom_js(){
+    global $redux_demo;
+    $editor_content = $redux_demo['custom-js-editor'];
+    echo $editor_content ? '<script>'. $editor_content .'</script>' : '';
 }
 
 
@@ -180,6 +199,6 @@ add_action('wp_head', __NAMESPACE__ . '\\site_favicon');
 function site_favicon() {
     global $redux_demo;
     $options = $redux_demo;
-    $favicon = $options['favicon'] ? $options['favicon'] : get_template_directory_uri().'/favicon.ico';
-    echo '<link rel="shortcut icon" href="'.$favicon.'">';
+    $favicon = $options['favicon']['url'] ? $options['favicon']['url'] : get_template_directory_uri().'/dist/images/favicon.ico';
+    echo '<link rel="shortcut icon" href="'. $favicon .'">';
 }

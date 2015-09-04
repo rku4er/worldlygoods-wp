@@ -1,13 +1,17 @@
 .navbar-collapse .socials{
-    float: right;
     line-height: $navbar-height;
+
+    @media (min-width: $screen-md-min){
+        float: right;
+        margin-right: $grid-gutter-width/2;
+    }
 
     a{
         color: $navbar-default-link-color;
         border-color: $navbar-default-link-color;
         &:hover,
         &:focus{
-            color: $brand-primary;
+            color: #fff;
             background-color: $navbar-default-link-hover-color;
             border-color: $navbar-default-link-hover-color;
         }
@@ -44,9 +48,9 @@
         opacity: .9;
         z-index: -1;
     }
-    .socials,
-    .navbar-nav{
-        @media (min-width: $screen-sm-min){
+    @media (min-width: $screen-sm-min){
+        .socials,
+        .navbar-nav{
             margin-top: $navbar-padding-vertical;
         }
     }

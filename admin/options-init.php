@@ -22,17 +22,18 @@
      */
 
     $sampleHTML = '';
-    if ( file_exists( dirname( __FILE__ ) . 'sample/info-html.html' ) ) {
+    if ( file_exists( dirname( __FILE__ ) . '/sample/info-html.html' ) ) {
         Redux_Functions::initWpFilesystem();
 
         global $wp_filesystem;
 
-        $sampleHTML = $wp_filesystem->get_contents( dirname( __FILE__ ) . 'sample/info-html.html' );
+        $sampleHTML = $wp_filesystem->get_contents( dirname( __FILE__ ) . '/sample/info-html.html' );
     }
 
     // Background Patterns Reader
     $sample_patterns_path = ReduxFramework::$_dir . '../sample/patterns/';
     $sample_patterns_url  = ReduxFramework::$_url . '../sample/patterns/';
+    $sample_presets_url  = ReduxFramework::$_url . '../sample/presets/';
     $sample_patterns      = array();
 
     if ( is_dir( $sample_patterns_path ) ) {
@@ -172,61 +173,61 @@
     );
 
     // ADMIN BAR LINKS -> Setup custom links in the admin bar menu as external items.
-    $args['admin_bar_links'][] = array(
-        'id'    => 'redux-docs',
-        'href'  => 'http://docs.reduxframework.com/',
-        'title' => __( 'Documentation', 'redux-framework-demo' ),
-    );
+    //$args['admin_bar_links'][] = array(
+        //'id'    => 'redux-docs',
+        //'href'  => 'http://docs.reduxframework.com/',
+        //'title' => __( 'Documentation', 'redux-framework-demo' ),
+    //);
 
-    $args['admin_bar_links'][] = array(
-        //'id'    => 'redux-support',
-        'href'  => 'https://github.com/ReduxFramework/redux-framework/issues',
-        'title' => __( 'Support', 'redux-framework-demo' ),
-    );
+    //$args['admin_bar_links'][] = array(
+        ////'id'    => 'redux-support',
+        //'href'  => 'https://github.com/ReduxFramework/redux-framework/issues',
+        //'title' => __( 'Support', 'redux-framework-demo' ),
+    //);
 
-    $args['admin_bar_links'][] = array(
-        'id'    => 'redux-extensions',
-        'href'  => 'reduxframework.com/extensions',
-        'title' => __( 'Extensions', 'redux-framework-demo' ),
-    );
+    //$args['admin_bar_links'][] = array(
+        //'id'    => 'redux-extensions',
+        //'href'  => 'reduxframework.com/extensions',
+        //'title' => __( 'Extensions', 'redux-framework-demo' ),
+    //);
 
     // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
-    $args['share_icons'][] = array(
-        'url'   => 'https://github.com/ReduxFramework/ReduxFramework',
-        'title' => 'Visit us on GitHub',
-        'icon'  => 'el el-github'
-        //'img'   => '', // You can use icon OR img. IMG needs to be a full URL.
-    );
-    $args['share_icons'][] = array(
-        'url'   => 'https://www.facebook.com/pages/Redux-Framework/243141545850368',
-        'title' => 'Like us on Facebook',
-        'icon'  => 'el el-facebook'
-    );
-    $args['share_icons'][] = array(
-        'url'   => 'http://twitter.com/reduxframework',
-        'title' => 'Follow us on Twitter',
-        'icon'  => 'el el-twitter'
-    );
-    $args['share_icons'][] = array(
-        'url'   => 'http://www.linkedin.com/company/redux-framework',
-        'title' => 'Find us on LinkedIn',
-        'icon'  => 'el el-linkedin'
-    );
+    //$args['share_icons'][] = array(
+        //'url'   => 'https://github.com/ReduxFramework/ReduxFramework',
+        //'title' => 'Visit us on GitHub',
+        //'icon'  => 'el el-github'
+        ////'img'   => '', // You can use icon OR img. IMG needs to be a full URL.
+    //);
+    //$args['share_icons'][] = array(
+        //'url'   => 'https://www.facebook.com/pages/Redux-Framework/243141545850368',
+        //'title' => 'Like us on Facebook',
+        //'icon'  => 'el el-facebook'
+    //);
+    //$args['share_icons'][] = array(
+        //'url'   => 'http://twitter.com/reduxframework',
+        //'title' => 'Follow us on Twitter',
+        //'icon'  => 'el el-twitter'
+    //);
+    //$args['share_icons'][] = array(
+        //'url'   => 'http://www.linkedin.com/company/redux-framework',
+        //'title' => 'Find us on LinkedIn',
+        //'icon'  => 'el el-linkedin'
+    //);
 
     // Panel Intro text -> before the form
-    if ( ! isset( $args['global_variable'] ) || $args['global_variable'] !== false ) {
-        if ( ! empty( $args['global_variable'] ) ) {
-            $v = $args['global_variable'];
-        } else {
-            $v = str_replace( '-', '_', $args['opt_name'] );
-        }
-        $args['intro_text'] = sprintf( __( '<p>Did you know that Redux sets a global variable for you? To access any of your saved options from within your code you can use your global variable: <strong>$%1$s</strong></p>', 'redux-framework-demo' ), $v );
-    } else {
-        $args['intro_text'] = __( '<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'redux-framework-demo' );
-    }
+    //if ( ! isset( $args['global_variable'] ) || $args['global_variable'] !== false ) {
+        //if ( ! empty( $args['global_variable'] ) ) {
+            //$v = $args['global_variable'];
+        //} else {
+            //$v = str_replace( '-', '_', $args['opt_name'] );
+        //}
+        //$args['intro_text'] = sprintf( __( '<p>Did you know that Redux sets a global variable for you? To access any of your saved options from within your code you can use your global variable: <strong>$%1$s</strong></p>', 'redux-framework-demo' ), $v );
+    //} else {
+        //$args['intro_text'] = __( '<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'redux-framework-demo' );
+    //}
 
     // Add content after the form.
-    $args['footer_text'] = __( '<p>This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.</p>', 'redux-framework-demo' );
+    //$args['footer_text'] = __( '<p>This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.</p>', 'redux-framework-demo' );
 
     Redux::setArgs( $opt_name, $args );
 
@@ -239,23 +240,23 @@
      * ---> START HELP TABS
      */
 
-    $tabs = array(
-        array(
-            'id'      => 'redux-help-tab-1',
-            'title'   => __( 'Theme Information 1', 'redux-framework-demo' ),
-            'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo' )
-        ),
-        array(
-            'id'      => 'redux-help-tab-2',
-            'title'   => __( 'Theme Information 2', 'redux-framework-demo' ),
-            'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo' )
-        )
-    );
-    Redux::setHelpTab( $opt_name, $tabs );
+    //$tabs = array(
+        //array(
+            //'id'      => 'redux-help-tab-1',
+            //'title'   => __( 'Theme Information 1', 'redux-framework-demo' ),
+            //'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo' )
+        //),
+        //array(
+            //'id'      => 'redux-help-tab-2',
+            //'title'   => __( 'Theme Information 2', 'redux-framework-demo' ),
+            //'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo' )
+        //)
+    //);
+    //Redux::setHelpTab( $opt_name, $tabs );
 
     // Set the help sidebar
-    $content = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'redux-framework-demo' );
-    Redux::setHelpSidebar( $opt_name, $content );
+    //$content = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'redux-framework-demo' );
+    //Redux::setHelpSidebar( $opt_name, $content );
 
 
     /*
@@ -275,6 +276,188 @@
 
 
      */
+     // -> START General
+     Redux::setSection( $opt_name, array(
+         'title'            => __( 'General', 'redux-framework-demo' ),
+         'id'               => 'general',
+         'desc'             => __( 'These are really basic fields!', 'redux-framework-demo' ),
+         'customizer_width' => '400px',
+         'icon'             => 'el el-home',
+         'desc'             => __( 'Here you can set most major preferences', 'redux-framework-demo' ),
+         'fields'           => array(
+             array(
+                 'id'       => 'navbar-logo',
+                 'type'     => 'media',
+                 'url'      => true,
+                 'title'    => __( 'Navbar Logo', 'redux-framework-demo' ),
+                 'subtitle' => __( 'Choose logo image', 'redux-framework-demo' ),
+                 'compiler' => 'true',
+                 //'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+                 'default'  => array( 'url' => 'http://s.wordpress.org/style/images/codeispoetry.png' ),
+             ),
+             array(
+                 'id'       => 'favicon',
+                 'type'     => 'media',
+                 'url'      => true,
+                 'title'    => __( 'Favicon', 'redux-framework-demo' ),
+                 'subtitle' => __( 'Choose favicon .ico file', 'redux-framework-demo' ),
+                 'compiler' => 'true',
+                 //'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+             ),
+             array(
+                 'id'       => 'header-layout',
+                 'type'     => 'select',
+                 'title'    => __( 'Header Layout', 'redux-framework-demo' ),
+                 'options'  => array(
+                     '1' => 'Fixed',
+                     '2' => 'Fluid',
+                 ),
+                 'default'  => '1'
+             ),
+             array(
+                 'id'       => 'socials',
+                 'type'     => 'sortable',
+                 'title'    => __( 'Socials', 'redux-framework-demo' ),
+                 'label'    => true,
+                 'options'  => array(
+                     'Facebook'   => '',
+                     'Twitter'    => '',
+                     'Google Plus'=> '',
+                     'Linkedin'   => '',
+                     'Pinterest'  => '',
+                     'Instagram'  => ''
+                 )
+             ),
+             array(
+                 'id'         => 'custom-html-editor',
+                 'type'       => 'ace_editor',
+                 'title'      => __( 'Custom HTML Code', 'redux-framework-demo' ),
+                 'subtitle'   => __( 'Paste your HTML code here.', 'redux-framework-demo' ),
+                 'mode'       => 'html',
+                 'theme'      => 'chrome',
+                 'default'    => ''
+             ),
+             array(
+                 'id'       => 'custom-css-editor',
+                 'type'     => 'ace_editor',
+                 'title'    => __( 'Custom CSS Code', 'redux-framework-demo' ),
+                 'subtitle' => __( 'Paste your CSS code here.', 'redux-framework-demo' ),
+                 'mode'     => 'css',
+                 'theme'    => 'chrome',
+                 'default'  => ""
+             ),
+             array(
+                 'id'       => 'custom-js-editor',
+                 'type'     => 'ace_editor',
+                 'title'    => __( 'Custom JS Code', 'redux-framework-demo' ),
+                 'subtitle' => __( 'Paste your JS code here.', 'redux-framework-demo' ),
+                 'mode'     => 'javascript',
+                 'theme'    => 'chrome',
+                 'default'  => ""
+             ),
+         )
+     ) );
+
+     // -> START Typography
+     Redux::setSection( $opt_name, array(
+         'title'  => __( 'Typography', 'redux-framework-demo' ),
+         'id'     => 'typography',
+         'desc'   => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/typography/" target="_blank">docs.reduxframework.com/core/fields/typography/</a>',
+         'icon'   => 'el el-font',
+         'fields' => array(
+             array(
+                 'id'       => 'opt-typography-body',
+                 'type'     => 'typography',
+                 'title'    => __( 'Body Font', 'redux-framework-demo' ),
+                 'subtitle' => __( 'Specify the body font properties.', 'redux-framework-demo' ),
+                 'all_styles'  => false,
+                 'text-align'  => false,
+                 'subsets'     => false,
+                 'output'      => array( 'body' ),
+                 'compiler'    => true,
+                 'units'       => 'px',
+                 'default'  => array(
+                     'color'       => '#333',
+                     'font-family' => 'Arial,Helvetica,sans-serif',
+                     'font-weight' => 'Normal',
+                     'font-size'   => '16px',
+                 ),
+             ),
+             array(
+                 'id'          => 'opt-typography-headings',
+                 'type'        => 'typography',
+                 'title'       => __( 'Headings Font', 'redux-framework-demo' ),
+                 'subtitle'    => __( 'Specify the headings font properties.', 'redux-framework-demo' ),
+                 'all_styles'  => false,
+                 'font-size'   => false,
+                 'line-height' => false,
+                 'text-align'  => false,
+                 'subsets'     => false,
+                 'output'      => array( 'h1,h2,h3,h4,h5,h6,h2.entry-title a' ),
+                 'compiler'    => true,
+                 'units'       => 'px',
+                 'default'     => array(
+                     'color'       => '#333',
+                     'font-family' => 'Abel',
+                     'font-style'  => '700'
+                 ),
+             ),
+             array(
+                 'id'          => 'opt-typography-menu',
+                 'type'        => 'typography',
+                 'title'       => __( 'Menu Font', 'redux-framework-demo' ),
+                 'subtitle'    => __( 'Specify the menu font properties.', 'redux-framework-demo' ),
+                 'output'      => array( '.navbar-default .navbar-nav' ),
+                 'all_styles'  => false,
+                 'compiler'    => true,
+                 'text-align'  => false,
+                 'subsets'     => false,
+                 'units'       => 'px',
+                 'default'     => array(
+                     'color'       => '#333',
+                     'font-family' => 'Arial,Helvetica,sans-serif',
+                     'font-style'  => '400',
+                     'font-size'   => '18px'
+                 ),
+             ),
+             array(
+                 'id'          => 'opt-typography-slide-title',
+                 'type'        => 'typography',
+                 'title'       => __( 'Slide Title Font', 'redux-framework-demo' ),
+                 'subtitle'    => __( 'Specify the slide title font properties.', 'redux-framework-demo' ),
+                 'output'      => array( '.slide-title' ),
+                 'all_styles'  => false,
+                 'compiler'    => true,
+                 'text-align'  => false,
+                 'subsets'     => false,
+                 'units'       => 'px',
+                 'default'     => array(
+                     'color'       => '#ffffff',
+                     'font-family' => 'Abel',
+                     'font-style'  => '400',
+                     'font-size'   => '28px'
+                 ),
+             ),
+             array(
+                 'id'          => 'opt-typography-slide-caption',
+                 'type'        => 'typography',
+                 'title'       => __( 'Slide Caption Font', 'redux-framework-demo' ),
+                 'subtitle'    => __( 'Specify the slide caption font properties.', 'redux-framework-demo' ),
+                 'output'      => array( '.slide-caption' ),
+                 'all_styles'  => false,
+                 'compiler'    => true,
+                 'subsets'     => false,
+                 'text-align'  => false,
+                 'units'       => 'px',
+                 'default'     => array(
+                     'color'       => '#ffffff',
+                     'font-family' => 'Roboto',
+                     'font-style'  => '300',
+                     'font-size'   => '16px'
+                 ),
+             ),
+         )
+     ));
 
     // -> START Basic Fields
     Redux::setSection( $opt_name, array(
@@ -573,17 +756,6 @@
                 'theme'    => 'chrome',
                 'desc'     => 'Possible modes can be found at <a href="' . 'http://' . 'ace.c9.io" target="_blank">' . 'http://' . 'ace.c9.io/</a>.',
                 'default'  => "jQuery(document).ready(function(){\n\n});"
-            ),
-            array(
-                'id'         => 'custom-html-editor',
-                'type'       => 'ace_editor',
-                'full_width' => true,
-                'title'      => __( 'Custom HTML Code', 'redux-framework-demo' ),
-                'subtitle'   => __( 'Paste your HTML code here.', 'redux-framework-demo' ),
-                'mode'       => 'html',
-                'theme'      => 'chrome',
-                'desc'       => 'Will be added to site footer',
-                'default'    => ''
             ),
 
 
@@ -924,21 +1096,6 @@
         'desc'       => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/media/" target="_blank">docs.reduxframework.com/core/fields/media/</a>',
         'subsection' => true,
         'fields'     => array(
-            array(
-                'id'       => 'navbar-logo',
-                'type'     => 'media',
-                'url'      => true,
-                'title'    => __( 'Navbar Logo', 'redux-framework-demo' ),
-                'subtitle' => __( 'Choose logo image', 'redux-framework-demo' ),
-                'compiler' => 'true',
-                //'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-                'desc'     => '',
-                'default'  => array( 'url' => 'http://s.wordpress.org/style/images/codeispoetry.png' ),
-                //'hint'      => array(
-                    //'title'     => 'Tip:',
-                    //'content'   => 'Here you can select image from the gallery to display as your site logo.',
-                //)
-            ),
             array(
                 'id'       => 'opt-media',
                 'type'     => 'media',
@@ -1591,6 +1748,7 @@
             ),
         )
     ) );
+
     Redux::setSection( $opt_name, array(
         'title'      => __( 'Select Image', 'redux-framework-demo' ),
         'id'         => 'select-select_image',
@@ -1606,11 +1764,11 @@
                 'options' => array(
                     '1' => array(
                         'alt' => 'Preset 1',
-                        'img' => ReduxFramework::$_url . '../sample/presets/preset1.png',
+                        'img' => $sample_presets_url . 'preset1.png',
                     ),
                     '2' => array(
                         'alt' => 'Preset 2',
-                        'img' => ReduxFramework::$_url . '../sample/presets/preset2.png',
+                        'img' => $sample_presets_url . 'preset2.png',
                     ),
                 ),
             ),
@@ -1708,106 +1866,6 @@
         )
     ) );
 
-    // -> START Typography
-    Redux::setSection( $opt_name, array(
-        'title'  => __( 'Typography', 'redux-framework-demo' ),
-        'id'     => 'typography',
-        'desc'   => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/typography/" target="_blank">docs.reduxframework.com/core/fields/typography/</a>',
-        'icon'   => 'el el-font',
-        'fields' => array(
-            array(
-                'id'       => 'opt-typography-body',
-                'type'     => 'typography',
-                'title'    => __( 'Body Font', 'redux-framework-demo' ),
-                'subtitle' => __( 'Specify the body font properties.', 'redux-framework-demo' ),
-                'all_styles'  => false,
-                'text-align'  => false,
-                'subsets'     => false,
-                'output'      => array( 'body' ),
-                'compiler'    => true,
-                'units'       => 'px',
-                'default'  => array(
-                    'color'       => '#333',
-                    'font-family' => 'Arial,Helvetica,sans-serif',
-                    'font-weight' => 'Normal',
-                    'font-size'   => '16px',
-                ),
-            ),
-            array(
-                'id'          => 'opt-typography-headings',
-                'type'        => 'typography',
-                'title'       => __( 'Headings Font', 'redux-framework-demo' ),
-                'subtitle'    => __( 'Specify the headings font properties.', 'redux-framework-demo' ),
-                'all_styles'  => false,
-                'font-size'   => false,
-                'line-height' => false,
-                'text-align'  => false,
-                'subsets'     => false,
-                'output'      => array( 'h1,h2,h3,h4,h5,h6,h2.entry-title a' ),
-                'compiler'    => true,
-                'units'       => 'px',
-                'default'     => array(
-                    'color'       => '#333',
-                    'font-family' => 'Abel',
-                    'font-style'  => '700'
-                ),
-            ),
-            array(
-                'id'          => 'opt-typography-menu',
-                'type'        => 'typography',
-                'title'       => __( 'Menu Font', 'redux-framework-demo' ),
-                'subtitle'    => __( 'Specify the menu font properties.', 'redux-framework-demo' ),
-                'output'      => array( '.navbar-default .navbar-nav' ),
-                'all_styles'  => false,
-                'compiler'    => true,
-                'text-align'  => false,
-                'subsets'     => false,
-                'units'       => 'px',
-                'default'     => array(
-                    'color'       => '#333',
-                    'font-family' => 'Arial,Helvetica,sans-serif',
-                    'font-style'  => '400',
-                    'font-size'   => '18px'
-                ),
-            ),
-            array(
-                'id'          => 'opt-typography-slide-title',
-                'type'        => 'typography',
-                'title'       => __( 'Slide Title Font', 'redux-framework-demo' ),
-                'subtitle'    => __( 'Specify the slide title font properties.', 'redux-framework-demo' ),
-                'output'      => array( '.slide-title' ),
-                'all_styles'  => false,
-                'compiler'    => true,
-                'text-align'  => false,
-                'subsets'     => false,
-                'units'       => 'px',
-                'default'     => array(
-                    'color'       => '#ffffff',
-                    'font-family' => 'Abel',
-                    'font-style'  => '400',
-                    'font-size'   => '28px'
-                ),
-            ),
-            array(
-                'id'          => 'opt-typography-slide-caption',
-                'type'        => 'typography',
-                'title'       => __( 'Slide Caption Font', 'redux-framework-demo' ),
-                'subtitle'    => __( 'Specify the slide caption font properties.', 'redux-framework-demo' ),
-                'output'      => array( '.slide-caption' ),
-                'all_styles'  => false,
-                'compiler'    => true,
-                'subsets'     => false,
-                'text-align'  => false,
-                'units'       => 'px',
-                'default'     => array(
-                    'color'       => '#ffffff',
-                    'font-family' => 'Roboto',
-                    'font-style'  => '300',
-                    'font-size'   => '16px'
-                ),
-            ),
-        )
-    ));
 
     // -> START Additional Types
     Redux::setSection( $opt_name, array(

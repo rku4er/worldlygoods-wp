@@ -30,7 +30,6 @@ function slider_init( $attr ){
 
     global $wp_query;
     $page_ID = $wp_query->queried_object->ID;
-
     $prefix = 'sage_slider_';
     $slides = get_post_meta( $page_ID, $prefix .'group', true );
 
@@ -183,13 +182,17 @@ function socials_init( $attr ){
         'label' => false
     ), $attr ));
 
-    $socials = function_exists('get_field') ? get_field('socials', 'options') : false;
+    global $redux_demo;
+    $options = $redux_demo;
+
+    $socials = $options['socials'];
+
     if($socials){
         $buffer = '<span class="socials">';
         $buffer .= $label ? '<span>'.$label.'</span>' : '';
 
-        foreach( $socials as $social ){
-            $buffer .= '<a href="'. $social['social_url'] . '" target="_blank"><i class="fa fa-'. strtolower($social['social_name']) .'"></i></a>';
+        foreach( $socials as $key => $value ){
+            $buffer .= $value ? '<a href="'. $value . '" target="_blank"><i class="fa fa-'. strtolower($key) .'"></i></a>' : '';
         }
         $buffer .= '</span>';
         return $buffer;

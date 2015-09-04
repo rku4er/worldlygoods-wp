@@ -1,8 +1,8 @@
 <?php
     use Roots\Sage\Nav\NavWalker;
-    global $redux_demo;
 ?>
 <?php
+    global $redux_demo;
     $options = $redux_demo;
     $page_ID = $wp_query->queried_object->ID;
     $prefix = 'sage_page_options_';
@@ -16,7 +16,11 @@
         esc_url(home_url('/')),
         $logo_image ? $logo_image  : '<strong>'.get_bloginfo('name').'</strong><span>'.get_bloginfo('description') . '</span>'
     );
-    $container_class = $options['header_container'] ? $options['header_container'] : 'container';
+    if($options['header_layout'] === '1'){
+        $container_class = 'container';
+    }else if($options['header_layout'] === '2'){
+        $container_class = 'container-fluid';
+    }
 ?>
 <header class="banner navbar navbar-default <?php echo $navbar_position; ?>" role="banner">
     <div class="<?php echo $container_class; ?>">

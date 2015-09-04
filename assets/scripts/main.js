@@ -204,6 +204,9 @@
             uploadExtraData: {kvId: '10'},
         });
 
+        //Font Select
+        $('.fontselect').fontselect();
+
         // Parallax effect for Bootstrap Carousel
         $('.carousel-inline[data-type="parallax"] .item').each(function(){
          // declare the variable to affect the defined data-type
@@ -350,6 +353,8 @@
                 });
             });
         }
+
+
 
       },
       finalize: function() {
