@@ -1,9 +1,8 @@
 .content-info{
     font-size: 14px;
-    color: #ddd;
+    color: #000;
     font-weight: 500;
     position: relative;
-    box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
 
     &:before {
         content: "";
@@ -12,27 +11,26 @@
         bottom: 0;
         top: 0;
         position: absolute;
-        background-color: darken($brand-primary, 50%);
+        background-color: $brand-primary;
         z-index: -1;
     }
 
     h1,h2,h3,h4,h5,h6{
-        color: #fff;
+        color: #000;
+        font-size: 18px;
+        font-family: "brandon-grotesque";
     }
 
     a{
-        color: #ddd;
+        color: #000;
         transition: .3s ease-in-out;
         transition-property: background-color, border-color;
         text-decoration: none;
 
         &:hover,
         &:focus{
-            color: #fff;
+            text-decoration: underline;
         }
-    }
-    .gform_wrapper .gfield{
-        margin-bottom: 15px;
     }
 
     .container{
@@ -113,6 +111,17 @@
                 color: #000;
                  border-color: #fff;
                  background-color: #fff;
+            }
+        }
+    }
+    .gform_wrapper{
+        .validation_error{
+            display: none;
+        }
+        .gfield_error{
+            .validation_message{
+                color: $brand-danger;
+                white-space: nowrap;
             }
         }
     }

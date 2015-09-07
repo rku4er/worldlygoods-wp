@@ -82,12 +82,6 @@
           };
         };
 
-
-        // Avoid page jumping on empty links
-        $('.btn[href="#"]').click(function(e){
-            e.preventDefault();
-        });
-
         // Disable 300ms click delay on mobile
         FastClick.attach(document.body);
 
@@ -203,9 +197,6 @@
         $("input[type=file]").fileinput({
             uploadExtraData: {kvId: '10'},
         });
-
-        //Font Select
-        $('.fontselect').fontselect();
 
         // Parallax effect for Bootstrap Carousel
         $('.carousel-inline[data-type="parallax"] .item').each(function(){

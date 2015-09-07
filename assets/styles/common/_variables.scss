@@ -64,8 +64,8 @@ $link-hover-decoration: underline;
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif:  Roboto, Helvetica, Arial, sans-serif;
-$font-family-serif:       Georgia, "Times New Roman", Times, serif;
+$font-family-sans-serif:  "brandon-grotesque", Helvetica, Arial, sans-serif;
+$font-family-serif:       "ff-tisa-web-pro", Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
 $font-family-base:        $font-family-sans-serif;
@@ -87,7 +87,7 @@ $line-height-base:        1.428571429;
 $line-height-computed:    floor(($font-size-base * $line-height-base)); // ~20px
 
 //** By default, this inherits from the `<body>`.
-$headings-font-family:    inherit;
+$headings-font-family:    $font-family-serif;
 $headings-font-weight:    500;
 $headings-line-height:    1.1;
 $headings-color:          darken($brand-primary, 20%);
@@ -266,7 +266,7 @@ $dropdown-link-color:            $gray-dark;
 //** Hover color for dropdown links.
 $dropdown-link-hover-color:      #fff;
 //** Hover background for dropdown links.
-$dropdown-link-hover-bg:         $accent-color;
+$dropdown-link-hover-bg:         darken($accent-color, 5%);
 
 //** Active dropdown menu item text color.
 $dropdown-link-active-color:     $component-active-color;
@@ -390,8 +390,8 @@ $navbar-default-bg:                transparent;
 $navbar-default-border:            darken($navbar-default-bg, 6.5%);
 
 // Navbar links
-$navbar-default-link-color:                $brand-primary;
-$navbar-default-link-hover-color:          darken($brand-primary, 20%);
+$navbar-default-link-color:                darken($brand-primary, 30%);
+$navbar-default-link-hover-color:          black;
 $navbar-default-link-hover-bg:             transparent;
 $navbar-default-link-active-color:         $navbar-default-link-hover-color;
 $navbar-default-link-active-bg:            transparent;

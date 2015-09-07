@@ -8,8 +8,8 @@
     margin-bottom: 2em;
 }
 .gform_wrapper form {
-  margin-top: 2em;
-  margin-bottom: 1em;
+  margin-top: 0;
+  margin-bottom: $grid-gutter-width/2;
 }
 .gform_wrapper .gfield_required {
   padding-left: 1px;
@@ -68,5 +68,23 @@
     border-color: $input-border !important;
     &:focus{
         border-color: $input-border-focus !important;
+    }
+}
+.inline-form_wrapper {
+    .gform_fields,
+    .gfield{
+        margin-bottom: 0;
+    }
+    form.inline-form {
+        display: flex;
+        flex-direction: row;
+
+        .gform_body{
+            flex: 3;
+        }
+        .gform_footer{
+            flex: 1;
+            margin-top: 0;
+        }
     }
 }

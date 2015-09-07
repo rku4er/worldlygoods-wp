@@ -8,20 +8,18 @@ use Roots\Sage\Utils;
  */
 add_shortcode( 'slider', __NAMESPACE__.'\\slider_init' );
 function slider_init( $attr ){
-    extract(
-        shortcode_atts( array(
-            "animation"  => 'slide',
-            "interval"   => 5000,
-            "parallax"   => false,
-            "pause"      => false,
-            "wrap"       => false,
-            "keyboard"   => false,
-            "arrows"     => false,
-            "bullets"    => false,
-            "fullscreen" => false,
-        ), $attr )
+    $defaults = array (
+        "animation"  => 'slide',
+        "interval"   => 5,
+        "parallax"   => true,
+        "pause"      => true,
+        "wrap"       => true,
+        "keyboard"   => true,
+        "arrows"     => true,
+        "bullets"    => false,
+        "fullscreen" => false,
     );
-
+    $atts = wp_parse_args( $atts, $defaults );
 
     if( isset($GLOBALS['carousel_count']) )
       $GLOBALS['carousel_count']++;
@@ -35,15 +33,16 @@ function slider_init( $attr ){
 
     if($slides){
 
-        $animation   = $animation ? $animation : get_post_meta( $page_ID, $prefix .'animation', true );
-        $interval    = $interval ? $interval : get_post_meta( $page_ID, $prefix .'interval', true );
-        $parallax    = $parallax ? $parallax : get_post_meta( $page_ID, $prefix .'parallax', true );
-        $pause       = $pause ? 'hover' : get_post_meta( $page_ID, $prefix .'pause', true );
-        $wrap        = $wrap ? $wrap : get_post_meta( $page_ID, $prefix .'wrap', true );
-        $keyboard    = $keyboard ? $keyboard : get_post_meta( $page_ID, $prefix .'keyboard', true );
-        $arrows      = $arrows ? $arrows : get_post_meta( $page_ID, $prefix .'arrows', true );
-        $bullets     = $bullets ? $bullets : get_post_meta( $page_ID, $prefix .'bullets', true );
-        $fullscreen  = $fullscreen ? $fullscreen : get_post_meta( $page_ID, $prefix .'fullscreen', true );
+        $animation   = get_post_meta( $page_ID, $prefix .'animation', true ) || $atts['animation'];
+        $parallax    = get_post_meta( $page_ID, $prefix .'parallax', true ) || $atts['parallax'];
+        $pause       = get_post_meta( $page_ID, $prefix .'pause', true ) || $atts['pause'];
+        $wrap        = get_post_meta( $page_ID, $prefix .'wrap', true ) || $atts['wrap'];
+        $keyboard    = get_post_meta( $page_ID, $prefix .'keyboard', true ) || $atts['keyboard'];
+        $arrows      = get_post_meta( $page_ID, $prefix .'arrows', true ) || $atts['arrows'];
+        $bullets     = get_post_meta( $page_ID, $prefix .'bullets', true ) || $atts['bullets'];
+        $fullscreen  = get_post_meta( $page_ID, $prefix .'fullscreen', true ) || $atts['fullscreen'];
+        $interval    = get_post_meta( $page_ID, $prefix .'interval', true );
+        $interval    =-$interval ? $interval : $atts['interval'];
 
         $div_class   = 'row carousel carousel-inline'
             . (($animation === 'fade') ? ' slide carousel-fade' : ' slide')
@@ -159,9 +158,9 @@ function slider_init( $attr ){
           esc_attr( $id ),
           ( $parallax )   ? sprintf( ' data-type="%s"', 'parallax' ) : '',
           ( $interval )   ? sprintf( ' data-interval="%d"', ( $interval * 1000 )) : '',
-          ( $pause )      ? sprintf( ' data-pause="%s"', esc_attr( $pause ) ) : '',
+          ( $pause )      ? sprintf( ' data-pause="%s"', esc_attr( 'hover' ) ) : '',
           ( $wrap )       ? sprintf( ' data-wrap="%s"', esc_attr( $wrap ) ) : '',
-          ( $bullets ) ? '<ol class="carousel-indicators hidden-xs">' . implode( $indicators ) . '</ol>' : '',
+          ( $bullets )    ? '<ol class="carousel-indicators hidden-xs">' . implode( $indicators ) . '</ol>' : '',
           esc_attr( $inner_class ),
           implode($items),
           ( $arrows ) ? sprintf( '%s%s',
@@ -178,9 +177,10 @@ function slider_init( $attr ){
 
 add_shortcode( 'socials', __NAMESPACE__.'\\socials_init' );
 function socials_init( $attr ){
-    extract( shortcode_atts( array(
+    $defaults = array (
         'label' => false
-    ), $attr ));
+    );
+    $atts = wp_parse_args( $atts, $defaults );
 
     global $redux_demo;
     $options = $redux_demo;
@@ -189,7 +189,7 @@ function socials_init( $attr ){
 
     if($socials){
         $buffer = '<span class="socials">';
-        $buffer .= $label ? '<span>'.$label.'</span>' : '';
+        $buffer .= $atts['label'] ? '<span>'. $atts['label'] .'</span>' : '';
 
         foreach( $socials as $key => $value ){
             $buffer .= $value ? '<a href="'. $value . '" target="_blank"><i class="fa fa-'. strtolower($key) .'"></i></a>' : '';
@@ -210,6 +210,13 @@ function socials_init( $attr ){
   */
 add_shortcode( 'tabs_vertical', __NAMESPACE__.'\\bs_tabs_vertical' );
 function bs_tabs_vertical( $atts, $content = null ) {
+  $defaults = array (
+      "type"   => false,
+      "xclass" => false,
+      "data"   => false,
+      "text"   => false,
+  );
+  $atts = wp_parse_args( $atts, $defaults );
 
   if( isset( $GLOBALS['tabs_count'] ) )
     $GLOBALS['tabs_count']++;
@@ -217,12 +224,6 @@ function bs_tabs_vertical( $atts, $content = null ) {
     $GLOBALS['tabs_count'] = 0;
 
   $GLOBALS['tabs_default_count'] = 0;
-
-  $atts = shortcode_atts( array(
-    "type"   => false,
-    "xclass" => false,
-    "data"   => false
-  ), $atts );
 
   $ul_class  = 'nav';
   $ul_class .= ( $atts['type'] )     ? ' nav-' . $atts['type'] : ' nav-tabs';
@@ -246,24 +247,27 @@ function bs_tabs_vertical( $atts, $content = null ) {
             $GLOBALS['tabs_default_active'] = false;
         }
     }
+
     $i = 0;
     foreach( $atts_map as $tab ) {
+      $i++;
 
       $class  ='';
-      $class .= ( !empty($tab["tab"]["active"]) || ($GLOBALS['tabs_default_active'] && $i == 0) ) ? 'active' : '';
+      $class .= ( !empty($tab["tab"]["active"]) || ($GLOBALS['tabs_default_active'] && $i == 1) ) ? 'active' : '';
       $class .= ( !empty($tab["tab"]["xclass"]) ) ? ' ' . $tab["tab"]["xclass"] : '';
 
       $tabs[] = sprintf(
-        '<li%s><a href="#%s" data-toggle="tab">%s</a></li>',
+        '<li%s><a href="#%s" data-toggle="tab" aria-expanded="%s">%s</a></li>',
         ( !empty($class) ) ? ' class="' . $class . '"' : '',
         'custom-tab-' . $GLOBALS['tabs_count'] . '-' . md5($tab["tab"]["title"]),
+        ($i == 1) ? 'true' : 'false',
         $tab["tab"]["title"]
       );
-      $i++;
     }
   }
   return sprintf(
-    '<div class="col-sm-3"><ul class="%s" id="%s"%s>%s</ul></div><div class="col-sm-9"><div class="%s">%s</div></div>',
+    '<div class="row"><div class="col-sm-4">%s<ul class="%s" id="%s"%s>%s</ul></div><div class="col-sm-8"><div class="%s">%s</div></div></div>',
+    sprintf('<h4 class="sidebar-title" style="text-align: right">%s</h4>', $atts['text']),
     esc_attr( $ul_class ),
     esc_attr( $id ),
     ( $data_props ) ? ' ' . $data_props : '',
@@ -271,4 +275,71 @@ function bs_tabs_vertical( $atts, $content = null ) {
     esc_attr( $div_class ),
     do_shortcode( $content )
   );
+}
+
+
+/**
+  * Products
+  */
+add_shortcode( 'products', __NAMESPACE__.'\\get_product_tabs' );
+function get_product_tabs( $atts, $content = null ) {
+    $defaults = array (
+        'taxonomy' => 'product_category',
+        'columns'  => '4',
+        'size'     => 'thumbnail'
+    );
+    $atts = wp_parse_args( $atts, $defaults );
+
+    $args = array(
+        'post_type' => 'product',
+        'numberposts' => '-1',
+    );
+    $products = get_posts( $args );
+
+    if($products){
+        $html = '[tabs_vertical type="tabs" text="'. __('All Products', 'sage') .'"]';
+        $term_array = array();
+        $i = 0;
+
+        foreach ($products as $product): $i++;
+            $terms = get_the_terms( $product->ID, $atts['taxonomy'] );
+
+            foreach($terms as $term){
+                if(empty($term_array[$term->term_id])){
+                    $term_array[$term->name] = $term;
+                }
+            }
+
+        endforeach;
+
+        ksort($term_array);
+
+        foreach ($term_array as $term){
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => $atts['taxonomy'],
+                    'field' => 'id',
+                    'terms' => $term->term_id,
+                    'include_children' => false
+                )
+            );
+
+            $tab_products = get_posts( $args );
+            $html .= '[tab title="'. $term->name .'" fade="true"]';
+            $thumb_ids_array = array();
+
+            foreach( $tab_products as $product ){
+                $thumb_ids_array[] = get_post_thumbnail_id( $product->ID );
+            }
+
+            $html .= '<h2 class="term-title">'. $term->name .'</h2>';
+            $html .= do_shortcode('[gallery link="file" size="'. $atts['size'] .'" columns="'. $atts['columns'] .'" ids="'. join(',', $thumb_ids_array) .'"]');
+            $html .= '[/tab]';
+        }
+
+        $html .= '[/tabs_vertical]';
+
+        return do_shortcode($html);
+
+    }
 }

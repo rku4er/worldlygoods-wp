@@ -44,12 +44,19 @@ body {
         width: 100%;
     }
 }
-.navbar-fixed-top + div{
+.navbar-fixed-top + div,
+.main > .carousel-inline .carousel-caption{
     padding-top: 78px;
 
     @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
         padding-top: 142px;
     }
+}
+.main > .carousel-inline{
+     margin-top: -78px;
+     @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
+         margin-top: 142px;
+     }
 }
 
 
@@ -68,4 +75,5 @@ body {
     border-left-color: transparent;
     border-right-color: transparent;
 }
+
 

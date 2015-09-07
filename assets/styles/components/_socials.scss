@@ -3,6 +3,14 @@
     display: block;
     text-align: center;
 
+    
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-right: $grid-gutter-width/2;
+    }
+
     >span{
         display: none;
         @media (min-width: $screen-md-min){

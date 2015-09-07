@@ -1,12 +1,33 @@
 .gallery{
+    @media (max-width: $screen-xs-max){
+        text-align: center;
+    }
     .gallery-row{
         margin-left: 0;
         margin-right: 0;
         &+.gallery-row{
-            margin-top: 30px;
+            @media (min-width: $screen-sm-min){
+                margin-top: 5px;
+            }
+            @media (min-width: $screen-md-min){
+                margin-top: 10px;
+            }
         }
         & >div[class^="col-"]{
-            padding: 0;
+            padding: $padding-base-vertical;
+        }
+        @media (max-width: $screen-xs-max){
+            &.row{
+                display: inline;
+                &:before,
+                &:after{
+                    display: none;
+                }
+            }
+            &.row >div[class^="col-"]{
+                display: inline-block;
+                width: 50%;
+            }
         }
     }
     .thumb-wrapper{
@@ -20,6 +41,11 @@
             position: relative;
             transition: .3s ease-in-out;
             transition-property: box-shadow, transform;
+
+            &,
+            & >img{
+                width: 100%;
+            }
 
             &:before,
             &:after{
@@ -35,7 +61,7 @@
                 right: 0;
                 bottom: 0;
                 opacity: 0;
-                background-color: #fff;
+                background-color: $accent_color;
             }
             &:after{
                 content: "";
@@ -49,9 +75,8 @@
                 text-rendering: auto;
                 animation-duration: .75s;
             }
-            &:hover,
-            &:focus{
-                transform: translate3d(0,-1px,0);
+            &:hover {
+                /*transform: translate3d(0,-1px,0);*/
 
                 &:before{
                     opacity: 0.7;
@@ -86,7 +111,7 @@ a .img-thumbnail{
     &:focus{
         box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         border-color: $brand-primary;
-        transform: translate3d(0,-1px,0);
+        /*transform: translate3d(0,-1px,0);*/
     }
 
 }

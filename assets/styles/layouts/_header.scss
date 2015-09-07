@@ -31,6 +31,7 @@
         }
         @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
             margin-bottom: 1em;
+            text-align: center;
         }
     }
 
@@ -44,8 +45,6 @@
         bottom: 0;
 
         background-color: $brand-primary;
-        background: linear-gradient(to bottom,  #ffffff 0%,#eeeeee 100%);
-        opacity: .9;
         z-index: -1;
     }
     @media (min-width: $screen-sm-min){
@@ -58,10 +57,10 @@
         @media (max-width: $screen-sm-max){
             margin-top: 0;
             margin-bottom: 0;
+            text-align: center;
         }
         @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
             float: none;
-            text-align: center;
         }
         >li{
             @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
@@ -78,7 +77,7 @@
             >a:hover,
             >a:focus{
                 &:before{
-                    border-color: lighten($accent-color, 5%);
+                    border-color: black;
                     width: 100%;
                     left: 0;
 
@@ -91,13 +90,13 @@
             &.active{
                 >a{
                     background: #ffffff;
-                    background: linear-gradient(to bottom, lighten($brand-primary, 30%) 0%, transparent 100%);
+                    background: linear-gradient(to bottom, #ffffff 0%, transparent 100%);
                 }
             }
 
             >a{
                 position: relative;
-                text-shadow: 1px -1px 1px rgba(255,255,255,1);
+                text-shadow: 1px -1px 0 rgba(0,0,0,0.3);
 
                 @media (max-width: $screen-xs-max){
                     padding-top: 0.5em;
@@ -136,8 +135,7 @@
             display: block;
         }
         @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
-            margin-right: -20px;
-            text-align: center;
+            display: inline-block;
         }
 
         &:hover,

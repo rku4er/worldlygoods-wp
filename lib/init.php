@@ -74,18 +74,18 @@ function widgets_init() {
 /**
  * Work Post Type
  */
- add_action( 'init', __NAMESPACE__ . '\\create_post_type_property' );
-function create_post_type_property() {
+ add_action( 'init', __NAMESPACE__ . '\\create_post_type_product' );
+function create_post_type_product() {
 
-  register_post_type( 'property',
+  register_post_type( 'product',
     array(
       'labels' => array(
-        'name' => __( 'Properties' ),
-        'singular_name' => __( 'Property' ),
-        'add_new' => __( 'Add Property' ),
-        'add_new_item' => __( 'Add New Property' ),
+        'name' => __( 'Products' ),
+        'singular_name' => __( 'Product' ),
+        'add_new' => __( 'Add Product' ),
+        'add_new_item' => __( 'Add New Product' ),
       ),
-      'rewrite' => array('slug' => __( 'property' )),
+      'rewrite' => array('slug' => __( 'product' )),
       'public' => true,
       'exclude_from_search' => false,
       'has_archive' => true,
@@ -96,12 +96,7 @@ function create_post_type_property() {
       'supports' => array(
         'title',
         'editor',
-        'excerpt',
-        'author',
-        'thumbnail',
-        'revisions',
-        'comments',
-        'custom-fields'
+        'thumbnail'
       )
     )
   );
@@ -110,17 +105,17 @@ function create_post_type_property() {
 
 
 // hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', __NAMESPACE__ . '\\create_property_tax' );
-function create_property_tax() {
+add_action( 'init', __NAMESPACE__ . '\\create_product_tax' );
+function create_product_tax() {
     register_taxonomy(
-        'property_category',
-        'property',
+        'product_category',
+        'product',
         array(
             'label' => __( 'Category' ),
             'hierarchical' => true,
             'query_var' => true,
             'rewrite' => array(
-                'slug' => 'property-category',
+                'slug' => 'product-category',
                 'with_front' => false
             )
         )

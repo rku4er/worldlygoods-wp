@@ -81,21 +81,7 @@ function sage_register_general_options() {
         'desc'          => __( 'Enter value from 0 to 1 eg: 0.1', 'cmb2' ),
         'id'            => $prefix . 'bg_opacity',
         'type'          => 'text_small',
-        'default'       => '1'
-        // 'repeatable' => true,
-    ) );
-
-    $cmb_demo->add_field( array(
-        'name'             => __( 'Navbar position', 'cmb2' ),
-        'desc'             => __( 'field description (optional)', 'cmb2' ),
-        'id'               => $prefix . 'navbar_position',
-        'type'             => 'select',
-        'show_option_none' => 'default',
-        'options'          => array(
-            'fixed-top'    => __( 'Fixed Top', 'cmb2' ),
-            'fixed-bottom' => __( 'Fixed Bottom', 'cmb2' ),
-            'static-top'   => __( 'Static Top', 'cmb2' ),
-        ),
+        'default'       => '0.3'
         // 'repeatable' => true,
     ) );
 
