@@ -339,7 +339,61 @@ function get_product_tabs( $atts, $content = null ) {
 
         $html .= '[/tabs_vertical]';
 
-        echo do_shortcode($html);
+        return do_shortcode($html);
 
     }
+}
+
+
+
+/**
+  * Products
+  */
+add_shortcode( 'featured', __NAMESPACE__.'\\get_featured_products' );
+function get_featured_products( $atts, $content = null ) {
+    $defaults = array (
+        'taxonomy' => 'product_category',
+        'title'    => '',
+        'products' => '',
+    );
+    $atts = wp_parse_args( $atts, $defaults );
+
+    $args = array(
+        'post_type' => 'product',
+        'numberposts' => '-1',
+    );
+    $product_ids = split(',', $atts['products']);
+    if(!empty($product_ids)){
+        $html = '<div class="f-products row">'
+            .'<div class="container">'
+                .'<div class="col-title">'
+                    .'<h3 class="f-title">'. $atts['title'] .'</h3>'
+                .'</div>'
+                .'<div class="col-products">';
+
+                foreach($product_ids as $id){
+                    $html .= ''
+                        .'<div class="col-product col-sm-'. floor(12/count($product_ids)) .'">'
+                            .'<a href="'. get_permalink($id) .'" class="thumb">'
+                                .'<img src="'. wp_get_attachment_thumb_url(get_post_thumbnail_id($id)) .'">'
+                                .'<span class="overlay">'
+                                    .'<span class="more">'
+                                        .'<span class="text">'. __('View', 'sage') .'</span>'
+                                        .'<span class="glyphicon glyphicon-menu-right"></span>'
+                                        .'<span class="glyphicon glyphicon-menu-down"></span>'
+                                    .'</span>'
+                                    .'<h2 class="title">'. get_the_title($id) .'</h2>'
+                                .'</span>'
+                            .'</a>'
+                        .'</div>';
+                }
+
+         $html .= '</div>'  // col-products
+             .'</div>'  // container
+         .'</div>';  // f-products
+
+         return do_shortcode($html);
+    }
+
+
 }
