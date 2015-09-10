@@ -1,5 +1,5 @@
 .carousel{
-    margin-bottom: $navbar-height;
+    margin-bottom: 0;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 
     &.carousel-fade {
@@ -126,9 +126,9 @@
         }
 
         .slide-title{
-            @media (min-width: $screen-sm-min){
-                margin-bottom: 0.5em;
-            }
+            text-transform: uppercase;
+            margin-bottom: 0;
+            margin-top: 0.5em;
         }
         .slide-caption{
             p{

@@ -339,7 +339,7 @@ function get_product_tabs( $atts, $content = null ) {
 
         $html .= '[/tabs_vertical]';
 
-        return do_shortcode($html);
+        echo do_shortcode($html);
 
     }
 }
