@@ -366,16 +366,16 @@ function get_featured_products( $atts, $content = null ) {
     if(!empty($product_ids)){
         $html = '<div class="f-products row">'
             .'<div class="container">'
-                .'<div class="col-title">'
+                .'<div class="col-title row">'
                     .'<h3 class="f-title">'. $atts['title'] .'</h3>'
                 .'</div>'
-                .'<div class="col-products">';
+                .'<div class="col-products row">';
 
                 foreach($product_ids as $id){
                     $html .= ''
                         .'<div class="col-product col-sm-'. floor(12/count($product_ids)) .'">'
                             .'<a href="'. get_permalink($id) .'" class="thumb">'
-                                .'<img src="'. wp_get_attachment_thumb_url(get_post_thumbnail_id($id)) .'">'
+                                .'<img src="'. wp_get_attachment_image_src(get_post_thumbnail_id($id), 'medium')[0] .'">'
                                 .'<span class="overlay">'
                                     .'<span class="more">'
                                         .'<span class="text">'. __('View', 'sage') .'</span>'

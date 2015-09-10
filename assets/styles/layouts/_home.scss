@@ -27,10 +27,14 @@
         @media (min-width: $screen-sm-min){
              text-align: inherit;
         }
+        @media (min-width: $screen-lg-min){
+            font-size: 50px;
+        }
     }
 
     .col-product{
         text-align: center;
+
 
         @media (max-width: $screen-xs-max){
             & + .col-product{
@@ -41,6 +45,15 @@
         @media (min-width: $screen-sm-min){
             transform: skewX(-10deg);
             border-left: 1px solid $gray-dark;
+            padding: 0 20px;
+        }
+
+        @media (min-width: $screen-md-min){
+            padding: 0 30px;
+        }
+
+        @media (min-width: $screen-lg-min){
+            padding: 0 40px;
         }
 
         .thumb{
@@ -84,8 +97,8 @@
                 }
             }
             .title{
-                font-size: 17px;
-                line-height: 15px;
+                font-size: 18px;
+                line-height: 0.8;
                 margin: 0;
                 position: absolute;
                 bottom: 0;
@@ -96,13 +109,24 @@
                 @media (min-width: $screen-sm-min){
                     transform: skewX(10deg);
                 }
+                @media (min-width: $screen-lg-min),
+                (max-width: $screen-xs-max){
+                    font-size: 30px;
+                }
             }
 
             .more{
-                font-size: 13px;
+                font-size: 14px;
+                line-height: 24px;
                 display: inline-block;
                 @media (min-width: $screen-sm-min){
                     transform: skewX(10deg);
+                }
+
+                @media (min-width: $screen-lg-min),
+                (max-width: $screen-xs-max){
+                    font-size: 20px;
+                    line-height: 40px;
                 }
 
                 .text{

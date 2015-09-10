@@ -55,7 +55,7 @@ body {
 .main > .carousel-inline{
      margin-top: -78px;
      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
-         margin-top: 142px;
+         margin-top: -142px;
      }
 }
 

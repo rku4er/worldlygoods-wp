@@ -59,8 +59,8 @@ function display_sidebar() {
         'is_front_page',
         'is_page',
         ['is_page_template', 'template-fullwidth.php'],
-        ['is_post_type_archive', ['property']],
-        ['is_singular', ['property']]
+        ['is_post_type_archive', ['product']],
+        ['is_singular', ['product']]
       ]
     );
 
