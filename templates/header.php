@@ -27,24 +27,40 @@
         $container_class = 'container-fluid';
     }
 
+    if($options['menu-align'] === '1'){
+        $menu_align = 'menu-left';
+    }else if($options['menu-align'] === '2'){
+        $menu_align = 'menu-center';
+    }else if($options['menu-align'] === '3'){
+        $menu_align = 'menu-right';
+    }
+
     $socials = ($options['socials-in-header'] != 0) ? do_shortcode('[socials]') : '';
 ?>
 <header class="banner navbar navbar-default <?php echo $navbar_class; ?>" role="banner">
     <div class="<?php echo $container_class; ?>">
         <div class="navbar-header">
 
-          <?php echo $navbar_brand; ?>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only"><?php echo __('Toggle navigation', 'sage'); ?></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+
+          <?php echo $navbar_brand; ?>
+
         </div>
 
         <nav class="collapse navbar-collapse" role="navigation">
-          <?php if (has_nav_menu('primary_navigation')) wp_nav_menu(['theme_location' => 'primary_navigation', 'walker' => new NavWalker(), 'menu_class' => 'nav navbar-nav']);  ?>
-        <?php echo $socials; ?>
+            <?php if (has_nav_menu('primary_navigation')) {
+                wp_nav_menu([
+                    'theme_location' => 'primary_navigation',
+                    'walker' => new NavWalker(),
+                    'menu_class' => 'nav navbar-nav '. $menu_align
+                ]);
+            } ?>
+            <?php echo $socials; ?>
         </nav>
 
   </div>

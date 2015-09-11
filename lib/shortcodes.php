@@ -9,13 +9,13 @@ use Roots\Sage\Utils;
 add_shortcode( 'slider', __NAMESPACE__.'\\slider_init' );
 function slider_init( $attr ){
     $defaults = array (
-        "animation"  => 'slide',
-        "interval"   => 5,
-        "parallax"   => true,
-        "pause"      => true,
-        "wrap"       => true,
-        "keyboard"   => true,
-        "arrows"     => true,
+        "animation"  => 'fade',
+        "interval"   => false,
+        "parallax"   => false,
+        "pause"      => false,
+        "wrap"       => false,
+        "keyboard"   => false,
+        "arrows"     => false,
         "bullets"    => false,
         "fullscreen" => false,
     );
@@ -33,14 +33,22 @@ function slider_init( $attr ){
 
     if($slides){
 
-        $animation   = get_post_meta( $page_ID, $prefix .'animation', true ) || $atts['animation'];
-        $parallax    = get_post_meta( $page_ID, $prefix .'parallax', true ) || $atts['parallax'];
-        $pause       = get_post_meta( $page_ID, $prefix .'pause', true ) || $atts['pause'];
-        $wrap        = get_post_meta( $page_ID, $prefix .'wrap', true ) || $atts['wrap'];
-        $keyboard    = get_post_meta( $page_ID, $prefix .'keyboard', true ) || $atts['keyboard'];
-        $arrows      = get_post_meta( $page_ID, $prefix .'arrows', true ) || $atts['arrows'];
-        $bullets     = get_post_meta( $page_ID, $prefix .'bullets', true ) || $atts['bullets'];
-        $fullscreen  = get_post_meta( $page_ID, $prefix .'fullscreen', true ) || $atts['fullscreen'];
+        $animation   = get_post_meta( $page_ID, $prefix .'animation', true );
+        $animation   = $animation ? $animation : $atts['animation'];
+        $parallax    = get_post_meta( $page_ID, $prefix .'parallax', true );
+        $parallax    = $parallax ? $parallax : $atts['parallax'];
+        $pause       = get_post_meta( $page_ID, $prefix .'pause', true );
+        $pause       = $pause ? $pause : $atts['pause'];
+        $wrap        = get_post_meta( $page_ID, $prefix .'wrap', true );
+        $wrap        = $wrap ? $wrap : $atts['wrap'];
+        $keyboard    = get_post_meta( $page_ID, $prefix .'keyboard', true );
+        $keyboard    = $keyboard ? $keyboard : $atts['keyboard'];
+        $arrows      = get_post_meta( $page_ID, $prefix .'arrows', true );
+        $arrows      = $arrows ? $arrows : $atts['arrows'];
+        $bullets     = get_post_meta( $page_ID, $prefix .'bullets', true );
+        $bullets     = $bullets ? $bullets : $atts['bullets'];
+        $fullscreen  = get_post_meta( $page_ID, $prefix .'fullscreen', true );
+        $fullscreen  = $fullscreen ? $fullscreen : $atts['fullscreen'];
         $interval    = get_post_meta( $page_ID, $prefix .'interval', true );
         $interval    =-$interval ? $interval : $atts['interval'];
 
@@ -97,7 +105,7 @@ function slider_init( $attr ){
                     -webkit-animation-duration: '. $slide['caption_anim_duration'] .'s;
                     animation-duration: '. $slide['caption_anim_duration'] .'s;
                 ';
-                $caption_html = '<div class="slide-caption hidden-xs" data-animated="true" data-animation="'. $slide['caption_anim'] .'" style="'
+                $caption_html = '<div class="slide-caption" data-animated="true" data-animation="'. $slide['caption_anim'] .'" style="'
                     . $caption_style .'"><p>'
                     . $slide['caption_text'] . '</p></div>';
             }
@@ -152,15 +160,16 @@ function slider_init( $attr ){
         endforeach;
 
         return sprintf(
-          '<div class="%s" id="%s" data-ride="carousel" %s%s%s%s>'
+          '<div class="%s" id="%s" data-ride="carousel" %s%s%s%s%s>'
               . '%s<div class="%s">%s</div>%s</div>',
           esc_attr( $div_class ),
           esc_attr( $id ),
-          ( $parallax )   ? sprintf( ' data-type="%s"', 'parallax' ) : '',
-          ( $interval )   ? sprintf( ' data-interval="%d"', ( $interval * 1000 )) : '',
-          ( $pause )      ? sprintf( ' data-pause="%s"', esc_attr( 'hover' ) ) : '',
-          ( $wrap )       ? sprintf( ' data-wrap="%s"', esc_attr( $wrap ) ) : '',
-          ( $bullets )    ? '<ol class="carousel-indicators hidden-xs">' . implode( $indicators ) . '</ol>' : '',
+          ( $parallax )   ? ' data-type="parallax"' : ' data-type="false"',
+          ( $interval )   ? ' data-interval="'. $interval * 1000 .'"' : ' data-interval="false"',
+          ( $pause )      ? ' data-pause="hover"' : ' data-pause="false"',
+          ( $wrap )       ? ' data-wrap="true"' : ' data-wrap="false"',
+          ( $keyboard )   ? ' data-keyboard="true"' : ' data-keyboard="false"',
+          ( $bullets )    ? '<ol class="carousel-indicators">' . implode( $indicators ) . '</ol>' : '',
           esc_attr( $inner_class ),
           implode($items),
           ( $arrows ) ? sprintf( '%s%s',
@@ -397,3 +406,30 @@ function get_featured_products( $atts, $content = null ) {
 
 
 }
+
+
+/**
+  * Section
+  */
+add_shortcode( 'section', __NAMESPACE__.'\\get_section' );
+function get_section( $atts, $content = null ) {
+    $defaults = array (
+        'class'       => 'layout-section',
+        'bg-color'    => 'transparent',
+        'padding'     => '',
+        'fluid'       => false
+    );
+    $atts = wp_parse_args( $atts, $defaults );
+
+    $padding = $atts['padding'];
+    $bg_color = $atts['bg-color'];
+    $html = sprintf('<div class="%s row" style="background: %s; padding: %s 0;">%s</div>',
+        esc_attr($atts['class']),
+        esc_attr($bg_color),
+        esc_attr($padding),
+        $content
+    );
+
+    return do_shortcode($html);
+}
+

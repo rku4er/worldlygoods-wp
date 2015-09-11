@@ -27,7 +27,7 @@ function setup() {
   // http://codex.wordpress.org/Function_Reference/set_post_thumbnail_size
   // http://codex.wordpress.org/Function_Reference/add_image_size
   add_theme_support('post-thumbnails');
-  add_image_size('slider', 1200, 600, true);
+  add_image_size('slider', 1600 );
   update_option( 'medium_crop', 1 ); //Turn on image crop at medium size
 
   // Add post formats

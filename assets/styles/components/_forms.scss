@@ -86,5 +86,18 @@
             flex: 1;
             margin-top: 0;
         }
+        .gform_button{
+            color: black;
+        }
+    }
+    form.button-orange{
+        .gform_button{
+            background-color: #E47A23;
+
+            &:hover,
+            &:focus{
+                background-color: darken( #E47A23, 15% );
+            }
+        }
     }
 }

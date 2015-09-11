@@ -265,6 +265,17 @@
                  ),
                  'default'  => '1'
              ),
+             array(
+                 'id'       => 'menu-align',
+                 'type'     => 'button_set',
+                 'title'    => __( 'Menu align', 'redux-framework-demo' ),
+                 'options'  => array(
+                     '1' => 'Left',
+                     '2' => 'Center',
+                     '3' => 'Right',
+                 ),
+                 'default'  => '3'
+             ),
          )
      ) );
 

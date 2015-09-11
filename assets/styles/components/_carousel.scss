@@ -22,7 +22,7 @@
     }
     &.carousel-inline{
         .item{
-            background-size: cover;
+            background-size: contain;
             background-repeat: no-repeat;
             background-position: 50% 50%;
 
@@ -40,8 +40,6 @@
                 opacity: 0;
                 display: block;
                 margin: 0 auto;
-                max-width: none;
-                height: 100%;
             }
         }
     }
@@ -60,6 +58,60 @@
 
         @media (min-width: $screen-sm-min){
             bottom: 20%;
+        }
+
+        [data-animated="true"]{
+            opacity: 0;
+
+            &.animated{
+                opacity: 1;
+            }
+        }
+
+        .slide-title{
+            text-transform: uppercase;
+            margin-bottom: 0;
+            margin-top: 0.5em;
+
+            @media (max-width: $screen-xs-max){
+                font-size: 20px;
+                line-height: 26px;
+            }
+        }
+        .slide-caption{
+
+            @media (max-width: $screen-xs-max){
+                font-size: 16px;
+                line-height: 20px;
+            }
+
+            p{
+                display: inline-block;
+            }
+        }
+        .text-wrapper{
+            position: relative;
+            padding: 1em 0;
+            display: inline-block;
+
+            @media (min-width: $screen-md-min){
+                padding-left: 3em;
+                padding-right: 3em;
+            }
+            >span,
+            >span >span{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: block;
+                z-index: -1;
+            }
+            >span >span{
+                border-radius: 5px;
+                opacity: 0;
+            }
         }
 
         >div {
@@ -117,52 +169,6 @@
             }
         } 
 
-        [data-animated="true"]{
-            opacity: 0;
-
-            &.animated{
-                opacity: 1;
-            }
-        }
-
-        .slide-title{
-            text-transform: uppercase;
-            margin-bottom: 0;
-            margin-top: 0.5em;
-        }
-        .slide-caption{
-            p{
-                display: inline-block;
-            }
-        }
-        .text-wrapper{
-            position: relative;
-            padding: 1em 0;
-            @media (min-width: $screen-md-min){
-                padding-left: 3em;
-                padding-right: 3em;
-            }
-            @media (min-width: $screen-md-min){
-                display: inline-block;
-            }
-            @media (max-width: $screen-xs-max){
-                max-width: none !important;
-            }
-            >span,
-            >span >span{
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                display: block;
-                z-index: -1;
-            }
-            >span >span{
-                border-radius: 5px;
-                opacity: 0;
-            }
-        }
     }
 }
 .carousel-indicators{

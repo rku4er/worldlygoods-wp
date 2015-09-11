@@ -29,7 +29,7 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 .wrap {
-    padding: 0 0 100px;
+    padding: 0;
     flex: 1;
     order: 0;
 
@@ -46,16 +46,25 @@ body {
 }
 .navbar-fixed-top + div,
 .main > .carousel-inline .carousel-caption{
-    padding-top: 78px;
+    padding-top: 63px;
 
     @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
-        padding-top: 142px;
+        padding-top: 133px;
+    }
+
+    @media (min-width: $screen-md-min){
+        padding-top: 83px;
     }
 }
 .main > .carousel-inline{
-     margin-top: -78px;
+     margin-top: -63px;
+
      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
-         margin-top: -142px;
+         margin-top: -133px;
+     }
+
+     @media (min-width: $screen-md-min){
+         margin-top: -83px;
      }
 }
 
@@ -81,4 +90,12 @@ body {
     text-transform: uppercase;
     margin-top: 2.1em;
     margin-bottom: 1.6em;
+}
+
+.layout-section{
+     padding: 50px 0;
+
+     h1,h2,h3,h4,h5,h6{
+         margin-top: 0;
+     }
 }

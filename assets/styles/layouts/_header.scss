@@ -9,8 +9,6 @@
 
         @media (max-width: $screen-sm-max){
             float: none;
-        }
-        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
             text-align: center;
         }
     }
@@ -64,14 +62,26 @@
     }
     .navbar-nav{
         text-transform: uppercase;
-        text-align: center;
 
         @media (max-width: $screen-xs-max){
             margin-bottom: 40px;
+            text-align: center;
         }
         @media (min-width: $screen-sm-min){
             float: none;
         }
+        @media (min-width: $screen-md-min){
+            &.menu-left{
+                text-align: left;
+            }
+            &.menu-center{
+                text-align: center;
+            }
+            &.menu-right{
+                text-align: right;
+            }
+        }
+
         @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
             margin-top: 0;
         }
@@ -87,24 +97,24 @@
             &.open >a:focus {
                 background-color: transparent;
             }
-            &.open >a,
-            >a:hover,
-            >a:focus{
-                &:before{
-                    border-color: black;
-                    width: 100%;
-                    left: 0;
+            /*&.open >a,*/
+            /*>a:hover,*/
+            /*>a:focus{*/
+                /*&:before{*/
+                    /*border-color: black;*/
+                    /*width: 100%;*/
+                    /*left: 0;*/
 
-                    @media (max-width: $screen-xs-max){
-                        width: 0;
-                    }
-                }
-            }
+                    /*@media (max-width: $screen-xs-max){*/
+                        /*width: 0;*/
+                    /*}*/
+                /*}*/
+            /*}*/
 
             &.active{
                 >a{
-                    background: #ffffff;
-                    background: linear-gradient(to bottom, #ffffff 0%, transparent 100%);
+                    /*background: #ffffff;*/
+                    /*background: linear-gradient(to bottom, #ffffff 0%, transparent 100%);*/
                 }
             }
 
@@ -116,22 +126,23 @@
                 @media (max-width: $screen-xs-max){
                     padding-top: 0.5em;
                     padding-bottom: 0.5em;
+                    display: block;
                 }
 
-                 &:before{
-                     content: "";
-                     display: block;
-                     position: absolute;
-                     top: 0;
-                     left: 50%;
-                     width: 0;
-                     height: 0;
-                     overflow: hidden;
-                     border-top: 2px solid transparent;
-                     transition: .3s ease-in-out;
-                     transition-property: border-color, width, left;
+                 /*&:before{*/
+                     /*content: "";*/
+                     /*display: block;*/
+                     /*position: absolute;*/
+                     /*top: 0;*/
+                     /*left: 50%;*/
+                     /*width: 0;*/
+                     /*height: 0;*/
+                     /*overflow: hidden;*/
+                     /*border-top: 2px solid transparent;*/
+                     /*transition: .3s ease-in-out;*/
+                     /*transition-property: border-color, width, left;*/
 
-                 }
+                 /*}*/
             }
         }
     }
@@ -141,16 +152,12 @@
         padding-bottom: 0;
         height: $navbar-height;
         line-height: auto;
+        text-align: center;
+        display: inline-block;
+        float: none;
 
         @media (max-width: $screen-xs-max){
-            margin-right: 60px;
-        }
-        @media (max-width: $screen-sm-max){
-            float: none;
-            display: block;
-        }
-        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
-            display: inline-block;
+            height: 30px;
         }
 
         &:hover,
@@ -182,14 +189,14 @@
         img{
              max-height: 100%;
              max-width: 100%;
-             float: left;
+             /*float: left;*/
 
              position: relative;
              top: 50%;
              transform: translateY(-50%);
 
-             @media (max-width: $screen-sm-max){
-                 float: none;
+             @media (min-width: $screen-md-min){
+                 float: left;
              }
 
         }
@@ -199,9 +206,12 @@
     .navbar-toggle{
         position: absolute; 
         top: 0;
-        right: 0;
-        margin-top: 20px;
-        border-radius: 100%;
+        left: 0;
+        margin: 20px 0 0 20px;
+
+        @media (max-width: $screen-xs-max){
+            margin-top: 15px;
+        }
     }
 }
 .dropdown-menu{
@@ -209,6 +219,7 @@
     padding: 0;
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
     border: 0 none;
+    text-align: left;
     @media (max-width: $screen-xs-max){
         text-align: center;
     }
