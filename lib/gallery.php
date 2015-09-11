@@ -104,9 +104,9 @@ function gallery($attr) {
 
     $output .= '<div class="thumb-wrapper">' . $image;
 
-    //if (trim($attachment->post_title)) {
-      //$output .= '<h2 class="thumb-title">' . wptexturize($attachment->post_title) . '</h2>';
-    //}
+    if (trim($attachment->post_title)) {
+      $output .= '<h3 class="thumb-title">' . wptexturize(get_the_title($attachment->post_parent)) . '</h3>';
+    }
     if (trim($attachment->post_excerpt)) {
       $output .= '<div class="caption">' . wptexturize($attachment->post_excerpt) . '</div>';
     }

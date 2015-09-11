@@ -294,7 +294,7 @@ add_shortcode( 'products', __NAMESPACE__.'\\get_product_tabs' );
 function get_product_tabs( $atts, $content = null ) {
     $defaults = array (
         'taxonomy' => 'product_category',
-        'columns'  => '4',
+        'columns'  => '3',
         'size'     => 'thumbnail'
     );
     $atts = wp_parse_args( $atts, $defaults );
@@ -342,6 +342,7 @@ function get_product_tabs( $atts, $content = null ) {
             }
 
             $html .= '<h2 class="term-title">'. $term->name .'</h2>';
+            $html .= '<p class="term-subtitle">'. __('Please contact us if you like something you see or would like to know more about the artisan group who made a product.', 'sage') .'</h2>';
             $html .= do_shortcode('[gallery link="file" size="'. $atts['size'] .'" columns="'. $atts['columns'] .'" ids="'. join(',', $thumb_ids_array) .'"]');
             $html .= '[/tab]';
         }

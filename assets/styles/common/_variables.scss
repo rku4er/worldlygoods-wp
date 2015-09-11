@@ -3,6 +3,8 @@ $darkbg-text: rgba(255,255,255,0.84);
 $lightbg-text: rgba(0,0,0,0.84);
 $icon-color: rgba(0,0,0,0.5);
 $accent-color: #FEDA00;
+$accent-color-2: #e47a23;
+
 // Checkboxes
 $checkbox-size: 20px;
 $radio-size: 20px;
@@ -390,8 +392,8 @@ $navbar-default-bg:                transparent;
 $navbar-default-border:            darken($navbar-default-bg, 6.5%);
 
 // Navbar links
-$navbar-default-link-color:                $gray-dark;
-$navbar-default-link-hover-color:          black;
+$navbar-default-link-color:                black;
+$navbar-default-link-hover-color:          $accent-color-2;
 $navbar-default-link-hover-bg:             transparent;
 $navbar-default-link-active-color:         $navbar-default-link-hover-color;
 $navbar-default-link-active-bg:            transparent;
