@@ -276,7 +276,7 @@ function bs_tabs_vertical( $atts, $content = null ) {
   }
   return sprintf(
     '<div class="row"><div class="col-sm-4">%s<ul class="%s" id="%s"%s>%s</ul></div><div class="col-sm-8"><div class="%s">%s</div></div></div>',
-    sprintf('<h4 class="products-sidebar-title">%s</h4>', $atts['text']),
+    sprintf('<h3 class="products-sidebar-title">%s</h3>', $atts['text']),
     esc_attr( $ul_class ),
     esc_attr( $id ),
     ( $data_props ) ? ' ' . $data_props : '',
