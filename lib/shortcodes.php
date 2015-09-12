@@ -276,7 +276,7 @@ function bs_tabs_vertical( $atts, $content = null ) {
   }
   return sprintf(
     '<div class="row"><div class="col-sm-4">%s<ul class="%s" id="%s"%s>%s</ul></div><div class="col-sm-8"><div class="%s">%s</div></div></div>',
-    sprintf('<h4 class="sidebar-title" style="text-align: right">%s</h4>', $atts['text']),
+    sprintf('<h4 class="products-sidebar-title">%s</h4>', $atts['text']),
     esc_attr( $ul_class ),
     esc_attr( $id ),
     ( $data_props ) ? ' ' . $data_props : '',
@@ -306,7 +306,7 @@ function get_product_tabs( $atts, $content = null ) {
     $products = get_posts( $args );
 
     if($products){
-        $html = '[tabs_vertical type="tabs" text="'. __('All Products', 'sage') .'"]';
+        $html = '[tabs_vertical type="tabs" xclass="product-tabs" text="'. __('All Products', 'sage') .'"]';
         $term_array = array();
         $i = 0;
 
@@ -343,7 +343,7 @@ function get_product_tabs( $atts, $content = null ) {
 
             $html .= '<h2 class="term-title">'. $term->name .'</h2>';
             $html .= '<p class="term-subtitle">'. __('Please contact us if you like something you see or would like to know more about the artisan group who made a product.', 'sage') .'</h2>';
-            $html .= do_shortcode('[gallery link="file" size="'. $atts['size'] .'" columns="'. $atts['columns'] .'" ids="'. join(',', $thumb_ids_array) .'"]');
+            $html .= '<div class="product-gallery">'. do_shortcode('[gallery link="file" size="'. $atts['size'] .'" columns="'. $atts['columns'] .'" ids="'. join(',', $thumb_ids_array) .'"]') .'</div>';
             $html .= '[/tab]';
         }
 

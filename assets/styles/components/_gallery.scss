@@ -101,12 +101,16 @@
             font-size: $font-size-large;
             margin: 0;
             background-color: $accent-color;
-            font-size: 14px;
-            padding: 5px;
+            font-size: 16px;
+            padding: 10px;
+            text-transform: uppercase;
 
             @media (min-width: $screen-lg-min){
                 font-size: 18px;
-                padding: 10px;
+                padding: 15px;
+            }
+            @media (max-width: $screen-md-max){
+                font-size: 14px;
             }
         }
     }

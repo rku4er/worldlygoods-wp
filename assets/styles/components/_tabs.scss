@@ -14,7 +14,7 @@
             &:focus{
                 border-width: 0 0 2px;
                 border-bottom-color: transparent;
-                color: $brand-primary;
+                color: #222;
             }
         }
         &.active >a,
@@ -22,10 +22,12 @@
         &.active >a:focus{
             border-width: 0 0 2px;
             border-color: lighten($accent-color, 10%);
+            background-color: $accent-color;
+            color: #222;
         }
         &.active >a{
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             transform: translate3d(0, -1px, 0);
+            background-color: $accent-color;
         }
     }
     &.tabs-vertical{
@@ -79,7 +81,6 @@
                 }
             }
             &.active >a{
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
                 transform: translate3d(1px,0,0);
                 border-right-color: lighten($accent-color, 10%);
             } 

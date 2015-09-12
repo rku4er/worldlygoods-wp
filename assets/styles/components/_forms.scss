@@ -3,6 +3,9 @@
 }
 .gform_wrapper li {
   @extend .form-group;
+  &:before{
+      display: none;
+  }
 }
 .gform_wrapper .gfield{
     margin-bottom: 2em;
@@ -22,6 +25,8 @@
 .ginput_container select,
 .ginput_container textarea {
   @extend .form-control;
+  font-size: inherit;
+  height: auto;
 }
 .ginput_container textarea {
   resize: vertical;
@@ -34,6 +39,7 @@
 .gform_button {
   @extend .btn;
   @extend .btn-primary;
+  font-size: inherit;
 }
 .gform_wrapper .gfield_error {
   .gfield_label {

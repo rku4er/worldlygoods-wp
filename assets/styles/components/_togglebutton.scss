@@ -28,6 +28,7 @@
     .toggle:after {
       content: "";
       display: inline-block;
+      vertical-align: top;
       width: 20px;
       height: 20px;
       background-color: $gray-lighter;
