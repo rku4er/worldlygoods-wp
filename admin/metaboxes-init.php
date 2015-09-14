@@ -50,7 +50,7 @@ function sage_register_general_options() {
      */
     $cmb_demo = new_cmb2_box( array(
         'id'            => $prefix . 'metabox',
-        'title'         => __( 'General', 'cmb2' ),
+        'title'         => __( 'Page Options', 'cmb2' ),
         'object_types'  => array( 'page', ),
         'context'       => 'normal',
         'priority'      => 'high',
@@ -180,6 +180,7 @@ function sage_register_slider_options() {
 
     // Start with an underscore to hide fields from custom fields list
     $prefix = 'sage_slider_';
+    $frontpage_id = get_option('page_on_front');
 
     /**
      * Repeatable Field Groups
@@ -188,6 +189,7 @@ function sage_register_slider_options() {
         'id'           => $prefix . 'metabox',
         'title'        => __( 'Slider Options', 'cmb2' ),
         'object_types' => array( 'page', ),
+        'show_on'      => array( 'key' => 'id', 'value' => array( $frontpage_id ) ),
     ) );
 
     $cmb_group->add_field( array(
@@ -269,7 +271,7 @@ function sage_register_slider_options() {
     $group_field_id = $cmb_group->add_field( array(
         'id'          => $prefix . 'group',
         'type'        => 'group',
-        'description' => __( 'Here you can add slides to the slider. Please take [slider] shortcode and insert it wherever you want.', 'cmb2' ),
+        'description' => __( 'Please take [slider] shortcode.', 'cmb2' ),
         'options'     => array(
             'group_title'   => __( 'Slide {#}', 'cmb2' ), // {#} gets replaced by row number
             'add_button'    => __( 'Add Another Slide', 'cmb2' ),
@@ -456,3 +458,131 @@ function sage_register_slider_options() {
 
 }
 
+add_action( 'cmb2_init', __NAMESPACE__ . '\\sage_register_world_options' );
+/**
+ * Hook in and add a demo metabox. Can only happen on the 'cmb2_init' hook.
+ */
+function sage_register_world_options() {
+
+    // Start with an underscore to hide fields from custom fields list
+    $prefix = 'sage_world_options_';
+    $frontpage_id = get_option('page_on_front');
+
+    /**
+     * Sample metabox to demonstrate each field type included
+     */
+    $cmb_demo = new_cmb2_box( array(
+        'id'            => $prefix . 'metabox',
+        'title'         => __( 'World Map Options', 'cmb2' ),
+        'object_types'  => array( 'page', ),
+        'context'       => 'normal',
+        'show_names'    => true,
+        'priority'      => 'low',
+        'show_on'       => array( 'key' => 'id', 'value' => array( $frontpage_id ) ),
+        // 'show_on_cb' => 'sage_show_if_front_page', // function should return a bool value
+        // 'cmb_styles' => false, // false to disable the CMB stylesheet
+        // 'closed'     => true, // true to keep the metabox closed by default
+    ) );
+
+    $cmb_demo->add_field( array(
+        'name' => __( 'Background Image', 'cmb2' ),
+        'desc' => __( 'Upload an image or enter an URL', 'cmb2' ),
+        'id'   => $prefix . 'bg_image',
+        'type' => 'file',
+        // 'repeatable' => true,
+    ) );
+
+    $cmb_demo->add_field( array(
+        'name'          => __( 'Background color', 'cmb2' ),
+        'desc'          => __( 'Enter background color', 'cmb2' ),
+        'id'            => $prefix . 'bg_color',
+        'type'          => 'colorpicker',
+        'default'       => '#D2D2D2'
+        // 'repeatable' => true,
+    ) );
+
+    $cmb_demo->add_field( array(
+        'name'          => __( 'Background opacity', 'cmb2' ),
+        'desc'          => __( 'Enter value from 0 to 1 eg: 0.1', 'cmb2' ),
+        'id'            => $prefix . 'bg_opacity',
+        'type'          => 'text_small',
+        'default'       => '1'
+        // 'repeatable' => true,
+    ) );
+
+    $cmb_demo->add_field( array(
+        'name' => __( 'Title', 'cmb2' ),
+        'desc' => __( 'Enter the title for section', 'cmb2' ),
+        'id'   => $prefix . 'title',
+        'type' => 'text',
+        // 'repeatable' => true,
+    ) );
+
+    $cmb_demo->add_field( array(
+        'name' => __( 'Title Offset Top', 'cmb2' ),
+        'id'   => $prefix . 'title_top',
+        'type' => 'text',
+        'default' => '10%'
+        // 'repeatable' => true,
+    ) );
+
+    $cmb_demo->add_field( array(
+        'name' => __( 'Caption', 'cmb2' ),
+        'desc' => __( 'Caption text here', 'cmb2' ),
+        'id'   => $prefix . 'caption',
+        'type' => 'textarea_code',
+        // 'repeatable' => true,
+    ) );
+
+    $cmb_demo->add_field( array(
+        'name' => __( 'Caption Offset Top', 'cmb2' ),
+        'id'   => $prefix . 'caption_top',
+        'type' => 'text',
+        'default' => '40%'
+        // 'repeatable' => true,
+    ) );
+
+    $cmb_demo->add_field( array(
+        'name' => 'Pin markers',
+        'id'   => $prefix .'pins_group_title',
+        'type' => 'title',
+    ) );
+
+    $group_field_id = $cmb_demo->add_field( array(
+        'id'          => $prefix . 'pins',
+        'type'        => 'group',
+        'description' => __( 'Please use [map] shortcode.', 'cmb2' ),
+        'options'     => array(
+            'group_title'   => __( 'Pin {#}', 'cmb2' ), // {#} gets replaced by row number
+            'add_button'    => __( 'Add Another Pin', 'cmb2' ),
+            'remove_button' => __( 'Remove Pin', 'cmb2' ),
+            'sortable'      => true, // beta
+            'closed'     => true, // true to have the groups closed by default
+        ),
+    ) );
+
+    $cmb_demo->add_group_field( $group_field_id, array(
+        'name' => __('Pin Title', 'sage'),
+        'id'   => 'title',
+        'type' => 'text',
+    ) );
+
+    $cmb_demo->add_group_field( $group_field_id, array(
+        'name' => __('Pin Title', 'sage'),
+        'id'   => 'excerpt',
+        'type' => 'textarea',
+    ) );
+
+    $cmb_demo->add_group_field( $group_field_id, array(
+        'name' => __('Position top', 'sage'),
+        'id'   => 'pos_top',
+        'type' => 'text_small',
+    ) );
+
+    $cmb_demo->add_group_field( $group_field_id, array(
+        'name' => __('Position left', 'sage'),
+        'id'   => 'pos_left',
+        'type' => 'text_small',
+    ) );
+
+}

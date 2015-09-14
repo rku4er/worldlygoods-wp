@@ -5,7 +5,8 @@
     &.carousel-fade {
         .item {
             opacity: 0;
-            @include transition-property(opacity);
+            transition-property: opacity;
+
             &.active {
                 opacity: 1;
                 &.left, &.right {

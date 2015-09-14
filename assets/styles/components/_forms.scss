@@ -77,20 +77,53 @@
     }
 }
 .inline-form_wrapper {
+    &:after{
+        content: "";
+        display: table;
+        width: 100%;
+        clear: both;
+    }
     .gform_fields,
     .gfield{
         margin-bottom: 0;
     }
     form.inline-form {
+        border: 1px solid black;
         display: flex;
         flex-direction: row;
+        float: left;
+        clear: left;
 
         .gform_body{
             flex: 3;
+            
+            .ginput_container{
+                input{
+                    border: 0 none;
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                }
+            }
         }
         .gform_footer{
             flex: 1;
             margin-top: 0;
+            .btn,
+            .button,
+            .gform_button{
+                 width: 100%;
+                 height: 100%;
+                 display: block;
+                 text-transform: uppercase;
+                 padding-left: 0;
+                 padding-right: 0;
+
+                 &:hover,
+                 &:focus{
+                      color: #fff;
+                 }
+            }
         }
         .gform_button{
             color: black;

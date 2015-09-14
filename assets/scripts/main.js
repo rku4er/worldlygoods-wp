@@ -96,10 +96,10 @@
 
 
         // Tooltip
-        $('.bs-tooltip').tooltip();
+        $('[data-toggle="tooltip"]').tooltip();
 
         // Popover
-        $(".bs-popover")
+        $('[data-toggle="popover"]')
           .on('click', function(e) {e.preventDefault(); return true;})
           .popover();
 

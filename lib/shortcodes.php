@@ -434,3 +434,56 @@ function get_section( $atts, $content = null ) {
     return do_shortcode($html);
 }
 
+
+/**
+  * Section
+  */
+add_shortcode( 'map', __NAMESPACE__.'\\get_map' );
+function get_map( $atts, $content = null ) {
+    global $wp_query;
+    $page_ID = $wp_query->queried_object->ID;
+    $prefix = 'sage_world_options_';
+
+    $defaults = array (
+        'bg_image'   => get_post_meta( $page_ID, $prefix .'bg_image', true ),
+        'bg_color'   => get_post_meta( $page_ID, $prefix .'bg_color', true ),
+        'bg_opacity' => get_post_meta( $page_ID, $prefix .'bg_opacity', true ),
+        'title'      => get_post_meta( $page_ID, $prefix .'title', true ),
+        'title_top'  => get_post_meta( $page_ID, $prefix .'title_top', true ),
+        'caption'    => get_post_meta( $page_ID, $prefix .'caption', true ),
+        'caption_top' => get_post_meta( $page_ID, $prefix .'caption_top', true ),
+        'pins'       => get_post_meta( $page_ID, $prefix .'pins', true ),
+    );
+    $atts = wp_parse_args( $atts, $defaults );
+
+    $pins = $atts['pins'];
+    if(!empty($pins)){
+
+        $pins_html = '<ul class="pins">';
+
+        foreach($pins as $pin){
+            $pins_html .= sprintf('<li class="pin" style="top: %s; left: %s;">%s</li>',
+                esc_attr($pin['pos_top']),
+                esc_attr($pin['pos_left']),
+                sprintf('<a href="#" tabindex="0" data-placement="%s" data-trigger="focus" role="button" data-toggle="popover" title="%s" data-content="%s">%s</a>',
+                    esc_attr('top'),
+                    esc_attr($pin['title']),
+                    esc_attr($pin['excerpt']),
+                     '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACFElEQVRYhcWXO0gdQRSGj4+oiIKVt9JgMBIRFBQbMYqgJqlsghFFxUKbi49OrbWQpIq1NtZiERUFsTJEkaSQFFpIQkwTLER8EeLzP94z7CDxOjM79/rDB8vd/f9zdu7uzCyRnSKgD8yDbXAibMtvvSDfMtNIeeA9OAPXD8DXTIjHiyrAL63Ab/ARvAU1Ah9Pyjl13U9QHrZ4LTiWwEMQBRlxrudzA+BIPMfSoJOKwL4E/QClFt4y8VxLRqFLA6sScACKHfwlFBs1zlixNb+h4L/scCiu1KXlNNsYF8W0BVJCNJAKvkvWvKkpB/wV03CI4kqjFLyeOSaGBgqGrcpDA9VaXr2JoV0zRDw0ENHy2k0MUc3gYzbL0/KiJoY2zfDCQwOlWl6rieEpuBJDt4cGeiSLMwtMTcti+uShgQXJWrYxvaag68oQxaspGM1XNkaefNbEuAmyHYqz5xs53L0SLyj/JGAWZFp4s8CceE/BM5cGWGMUPMFfyGxR4kVoXfMNuRZnPQEbWhiPyBRopNhdKvFxE5gG59r1SxRuLbkV37XalNxln4I9w13+kJ+Z9Fad9xS5j0uKjZJXzVg0MO67OCsX7BoU5wcwLRENsHiTehGnOH8jPE9UcaUPcRroT3RxFr9y+neC4ivFtmBJ0bv/NFCXrOIsnlw+a8XnkllcqUVr4OVjNJAO9sAOeZhuXTUCBsME3AAxacvp7s704AAAAABJRU5ErkJggg==" alt="pin">'
+                )
+            );
+        }
+
+        $pins_html .= '</ul>';
+    }
+
+    $html = sprintf('<div class="world-map row" style="%s">%s%s%s%s</div>',
+        'background-color: '. esc_attr($atts['bg_color']) .';',
+        '<img class="map" src="'. esc_attr($atts['bg_image']) .'" alt="world">',
+        '<h3 class="title" style="top: '. esc_attr($atts['title_top']) .'">'. esc_attr($atts['title']) .'</h3>',
+        '<div class="caption" style="top: '. esc_attr($atts['caption_top']) .'">'. esc_attr($atts['caption']) .'</div>',
+         $pins_html
+    );
+
+    return do_shortcode($html);
+}
