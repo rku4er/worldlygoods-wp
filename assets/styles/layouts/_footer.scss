@@ -54,13 +54,10 @@
                 }
 
                 @media (min-width: $screen-md-min){
-                    flex: 2;
-                    &:nth-child(1){
-                        flex: 1;
-                    }
+                    flex: 1;
                     &:nth-last-child(1),
                     &:nth-last-child(2){
-                        flex: 4;
+                        flex: 2;
                     }
                     & + section{
                         margin-top: 0;
@@ -121,18 +118,6 @@
                 color: #000;
                  border-color: #fff;
                  background-color: #fff;
-            }
-        }
-    }
-         
-    .gform_wrapper{
-        .validation_error{
-            display: none;
-        }
-        .gfield_error{
-            .validation_message{
-                color: $brand-danger;
-                white-space: nowrap;
             }
         }
     }
