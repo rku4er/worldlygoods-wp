@@ -383,7 +383,7 @@ function get_featured_products( $atts, $content = null ) {
 
                     $html .= ''
                         .'<div class="col-product col-sm-'. floor(12/count($product_ids)) .'">'
-                            .'<a href="'. get_permalink($id) .'" class="thumb">'
+                            .'<a href="/products/#custom-tab-0-'. md5($terms[0]->name) .'" class="thumb">'
                                 .'<img src="'. wp_get_attachment_image_src(get_post_thumbnail_id($id), 'medium')[0] .'">'
                                 .'<span class="overlay">'
                                     .'<span class="more">'

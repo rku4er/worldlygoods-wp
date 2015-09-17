@@ -170,6 +170,30 @@
             materialChoices();
         });
 
+        // Javascript to enable link to tab
+        var url = document.location.toString();
+        if (url.match('#')) {
+            $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+        }
+
+        // Change hash for page-reload
+        $('.nav-tabs a').on('shown.bs.tab', function (e) {
+            if(history.pushState) {
+                history.pushState(null, null, e.target.hash);
+            } else {
+                window.location.hash = e.target.hash;
+            }
+        });
+
+        // Page Jump Fix
+        if (location.hash) {
+          setTimeout(function() {
+
+            window.scrollTo(0, 0);
+          }, 1);
+        }
+
+
         // Set .navbar margin-top equal to #wpadminbar height
         var navbar = function(){
           return {
@@ -218,11 +242,23 @@
         var debouncedResize = debounce(function() {
             wrapper().spaceTop();
             navbar().spaceTop();
-            $('.carousel-fullscreen .carousel-inner').height(window.innerHeight);
+            if (window.matchMedia('(min-width: 768px)').matches) {
+                $('.carousel-fullscreen .carousel-inner').height(window.innerHeight);
+            }else{
+                $('.carousel-fullscreen .carousel-inner').height('auto');
+            }
         }, 100);
 
         // Window load handler
         $(window).load(function(){
+
+            // Page Jump Fix
+            if (location.hash) {
+              setTimeout(function() {
+
+                window.scrollTo(0, 0);
+              }, 1);
+            }
 
             // when the window resizes, redraw the grid
             $(window).resize(debouncedResize).trigger('resize');
