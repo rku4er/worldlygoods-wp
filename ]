@@ -364,12 +364,23 @@ function get_featured_products( $atts, $content = null ) {
     $defaults = array (
         'taxonomy' => 'product_category',
         'title'    => '',
-        'products' => '',
+        'terms'    => '',
     );
     $atts = wp_parse_args( $atts, $defaults );
 
-    $product_ids = split(',', $atts['products']);
-
+    $query_args = array(
+        'post_type' => 'product',
+        'numberposts' => '-1',
+        'tax_query' => array(
+            array(
+                'taxonomy' => $atts['taxonomy'],
+                'field' => 'id',
+                'terms' => split(',', $atts['terms']),
+                'include_children' => false
+            )
+        )
+    );
+    $product_ids = get_posts($query_args);
     if(!empty($product_ids)){
         $html = '<div class="f-products row">'
             .'<div class="container">'
@@ -379,8 +390,6 @@ function get_featured_products( $atts, $content = null ) {
                 .'<div class="col-products row">';
 
                 foreach($product_ids as $id){
-                    $terms = wp_get_post_terms( $id, $atts['taxonomy'] );
-
                     $html .= ''
                         .'<div class="col-product col-sm-'. floor(12/count($product_ids)) .'">'
                             .'<a href="'. get_permalink($id) .'" class="thumb">'
@@ -391,7 +400,7 @@ function get_featured_products( $atts, $content = null ) {
                                         .'<span class="glyphicon glyphicon-menu-right"></span>'
                                         .'<span class="glyphicon glyphicon-menu-down"></span>'
                                     .'</span>'
-                                    .'<h2 class="title">'. $terms[0]->name .'</h2>'
+                                    .'<h2 class="title">'. get_the_title($id) .'</h2>'
                                 .'</span>'
                             .'</a>'
                         .'</div>';
