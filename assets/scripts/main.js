@@ -21,79 +21,8 @@
         // JavaScript to be fired on all pages
         var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-        // Work with cookie
-        function getCookie(name) {
-          var matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-          ));
-          return matches ? decodeURIComponent(matches[1]) : undefined;
-        }
-
-        // options - объект с свойствами cookie (expires, path, domain, secure)
-        function setCookie(name, value, options) {
-          options = options || {};
-
-          var expires = options.expires;
-
-          if (typeof expires === "number" && expires) {
-            var d = new Date();
-            d.setTime(d.getTime() + expires*1000);
-            expires = options.expires = d;
-          }
-          if (expires && expires.toUTCString) {
-            options.expires = expires.toUTCString();
-          }
-
-          value = encodeURIComponent(value);
-
-          var updatedCookie = name + "=" + value;
-
-          for(var propName in options) {
-            updatedCookie += "; " + propName;
-            var propValue = options[propName];
-            if (propValue !== true) {
-              updatedCookie += "=" + propValue;
-            }
-          }
-
-          document.cookie = updatedCookie;
-        }
-
-        function deleteCookie(name) {
-          setCookie(name, "", { expires: -1 });
-        }
-
-        // Debounced resize
-        var debounce = function(func, wait, immediate) {
-          var timeout;
-          return function() {
-            var context = this, args = arguments;
-            var later = function() {
-              timeout = null;
-              if (!immediate){
-                func.apply(context, args);
-              }
-            };
-            if (immediate && !timeout){
-              func.apply(context, args);
-            }
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-          };
-        };
-
         // Disable 300ms click delay on mobile
         FastClick.attach(document.body);
-
-        // WP admin bar fix
-        (function(adminbar){
-            if(document.getElementById(adminbar)){
-                $('.navbar-fixed-top').css({
-                    'margin-top' : $('#'+adminbar).height()
-                });
-            }
-        })('wpadminbar');
-
 
         // Tooltip
         $('[data-toggle="tooltip"]').tooltip();
@@ -169,7 +98,7 @@
             });
         });
 
-
+        // Buttons ripple effect
         var ripples = [
           ".carousel-control",
           ".btn:not(.btn-link)",
@@ -241,6 +170,20 @@
             materialChoices();
         });
 
+        // Set .navbar margin-top equal to #wpadminbar height
+        var navbar = function(){
+          return {
+            spaceTop: function(){
+                [].forEach.call(document.querySelectorAll('.navbar-fixed-top'), function(object){
+                  var adminbar = document.getElementById('wpadminbar');
+                  if(adminbar){
+                    object.style.marginTop = adminbar.clientHeight + 'px';
+                  }
+                });
+            }
+          };
+        };
+
         // Set .wrap padding-top equal to navbar height
         var wrapper = function(){
           return {
@@ -252,37 +195,22 @@
           };
         };
 
-        // Set .navbar margin-top equal to #wpadminbar height
-        var navbar = function(){
-          return {
-            spaceTop: function(){
-                [].forEach.call(document.querySelectorAll('.navbar-fixed-top'), function(object){
-                  var adminbar = document.getElementById('wpadminbar');
-                  if(adminbar){
-                    object.style.marginTop = adminbar.clientHeight + 'px';
-                  }
-                });
-            },
-            getHeight: function(){
-                [].forEach.call(document.querySelectorAll('.banner'), function(object){
-                  return object.clientHeight;
-                });
+        // Debounced resize
+        var debounce = function(func, wait, immediate) {
+          var timeout;
+          return function() {
+            var context = this, args = arguments;
+            var later = function() {
+              timeout = null;
+              if (!immediate){
+                func.apply(context, args);
+              }
+            };
+            if (immediate && !timeout){
+              func.apply(context, args);
             }
-          };
-        };
-
-        // Set slider min-height equal to screen height
-        var slider = function(){
-          return {
-            setHeight: function(){
-                [].forEach.call(document.querySelectorAll('.carousel-fullscreen .item'), function(object){
-                    var navbarHeight;
-                    [].forEach.call(document.querySelectorAll('.banner'), function(object){
-                        navbarHeight = object.clientHeight;
-                    });
-                    object.style.height = window.innerHeight - navbarHeight + 'px';
-                });
-            }
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
           };
         };
 
@@ -290,10 +218,10 @@
         var debouncedResize = debounce(function() {
             wrapper().spaceTop();
             navbar().spaceTop();
-            slider().setHeight();
+            $('.carousel-fullscreen .carousel-inner').height(window.innerHeight);
         }, 100);
 
-
+        // Window load handler
         $(window).load(function(){
 
             // when the window resizes, redraw the grid
@@ -301,9 +229,6 @@
 
             // needed by preloaded
             $('body').addClass('loaded');
-
-            // Controls .wrap offset
-            //wrapper().setOffTop();
 
             $('.carousel-inline').each(function() {
                 var $myCarousel = $(this),

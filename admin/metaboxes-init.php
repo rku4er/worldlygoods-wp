@@ -502,15 +502,6 @@ function sage_register_world_options() {
     ) );
 
     $cmb_demo->add_field( array(
-        'name'          => __( 'Background opacity', 'cmb2' ),
-        'desc'          => __( 'Enter value from 0 to 1 eg: 0.1', 'cmb2' ),
-        'id'            => $prefix . 'bg_opacity',
-        'type'          => 'text_small',
-        'default'       => '1'
-        // 'repeatable' => true,
-    ) );
-
-    $cmb_demo->add_field( array(
         'name' => __( 'Title', 'cmb2' ),
         'desc' => __( 'Enter the title for section', 'cmb2' ),
         'id'   => $prefix . 'title',
