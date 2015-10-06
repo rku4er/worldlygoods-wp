@@ -4,7 +4,7 @@ namespace Roots\Sage\Shortcodes;
 use Roots\Sage\Utils;
 
 /**
- * Fullscreen slider shortcode
+ * Slider shortcode
  */
 add_shortcode( 'slider', __NAMESPACE__.'\\slider_init' );
 function slider_init( $attr ){
@@ -357,7 +357,7 @@ function get_product_tabs( $atts, $content = null ) {
 
 
 /**
-  * Products
+  * Featured
   */
 add_shortcode( 'featured', __NAMESPACE__.'\\get_featured_products' );
 function get_featured_products( $atts, $content = null ) {
@@ -435,7 +435,7 @@ function get_section( $atts, $content = null ) {
 
 
 /**
-  * Section
+  * Map
   */
 add_shortcode( 'map', __NAMESPACE__.'\\get_map' );
 function get_map( $atts, $content = null ) {
